@@ -13,14 +13,14 @@ public interface OrganizationNumService {
      * @param collegeId
      * @return
      */
-    Integer getcollegeCount(Integer collegeId);
+    Integer[] getcollegeCount(Integer collegeId);
 
     /**
      * 获取专业人数
      * @param specialtyId 专业id
      * @return
      */
-    Integer getspecialtyCount(Integer specialtyId);
+    Integer[] getspecialtyCount(Integer specialtyId);
 
     /**
      * 获取班级人数

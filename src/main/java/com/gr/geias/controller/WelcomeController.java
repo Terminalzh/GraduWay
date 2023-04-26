@@ -49,11 +49,15 @@ public class WelcomeController {
             return ruslt;
         }
         if (person.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
-            Integer integer = organizationNumService.getcollegeCount(person.getCollegeId());
+            Integer[] integers = organizationNumService.getcollegeCount(person.getCollegeId());
+            int sum = 0;
+            for (Integer integer : integers) {
+                sum += integer;
+            }
             Integer count = employmentInformationService.getCount(null, person, null);
             ruslt.put("success", true);
             ruslt.put("yijiuye", count);
-            ruslt.put("weijiuye", integer - count);
+            ruslt.put("weijiuye", sum - count);
             return ruslt;
         }
         if (person.getEnableStatus() == EnableStatusEnums.TEACHER.getState()) {
@@ -156,13 +160,17 @@ public class WelcomeController {
                 employmentInformation.setCollege(college);
                 Integer count = employmentInformationService.getCount(employmentInformation,
                         null, null);
-                Integer integer = organizationNumService.getcollegeCount(college.getCollegeId());
-                float ratio =0f;
-                if (integer!=0){
-                    ratio = (float)count / (float)integer;
+                Integer[] integers = organizationNumService.getcollegeCount(college.getCollegeId());
+                int sum = 0;
+                for (Integer integer : integers) {
+                    sum += integer;
+                }
+                float ratio = 0f;
+                if (sum != 0) {
+                    ratio = (float) count / (float) sum;
                 }
                 nameList.add(college.getCollegeName());
-                list.add(ratio*100);
+                list.add(ratio * 100);
             }
         }
         if (person.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
@@ -173,13 +181,17 @@ public class WelcomeController {
                 employmentInformation.setSpecialty(specialty);
                 Integer count = employmentInformationService.getCount(employmentInformation,
                         null, null);
-                Integer integer = organizationNumService.getspecialtyCount(specialty.getSpecialtyId());
-                float ratio =0f;
-                if (integer!=0){
-                    ratio = (float)count / (float)integer;
+                Integer[] integers = organizationNumService.getspecialtyCount(specialty.getSpecialtyId());
+                int sum = 0;
+                for (Integer integer : integers) {
+                    sum += integer;
+                }
+                float ratio = 0f;
+                if (sum != 0) {
+                    ratio = (float) count / (float) sum;
                 }
                 nameList.add(specialty.getSpecialtyName());
-                list.add(ratio*100);
+                list.add(ratio * 100);
             }
         }
         if (person.getEnableStatus() == EnableStatusEnums.TEACHER.getState()) {
@@ -192,12 +204,12 @@ public class WelcomeController {
                 Integer count = employmentInformationService.getCount(employmentInformation,
                         null, null);
                 Integer integer = organizationNumService.getClassGradeCount(classGrade.getClassId());
-                float ratio =0f;
-                if (integer!=0){
-                    ratio = (float)count / (float)integer;
+                float ratio = 0f;
+                if (integer != 0) {
+                    ratio = (float) count / (float) integer;
                 }
                 nameList.add(classGrade.getClassName());
-                list.add(ratio*100);
+                list.add(ratio * 100);
             }
         }
         ruslt.put("success", true);

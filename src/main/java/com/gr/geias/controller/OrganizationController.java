@@ -55,8 +55,12 @@ public class OrganizationController {
             collegeAndPerson.setCollege(college1);
             PersonInfo personById = personInfoService.getPersonById(college1.getAdminId());
             collegeAndPerson.setPersonInfo(personById);
-            Integer integer = organizationNumService.getcollegeCount(college1.getCollegeId());
-            collegeAndPerson.setSum(integer);
+            Integer[] integers = organizationNumService.getcollegeCount(college1.getCollegeId());
+            int sum = 0;
+            for (Integer integer : integers) {
+                sum += integer;
+            }
+            collegeAndPerson.setSum(sum);
             list.add(collegeAndPerson);
         }
         map.put("success", true);
@@ -238,8 +242,12 @@ public class OrganizationController {
             SpecialtyAndCollege specialtyAndCollege = new SpecialtyAndCollege();
             specialtyAndCollege.setSpecialty(specialty);
             specialtyAndCollege.setCollege(college);
-            Integer integer = organizationNumService.getspecialtyCount(specialty.getSpecialtyId());
-            specialtyAndCollege.setSum(integer);
+            Integer[] integers = organizationNumService.getspecialtyCount(specialty.getSpecialtyId());
+            int sum = 0;
+            for (Integer integer : integers) {
+                sum += integer;
+            }
+            specialtyAndCollege.setSum(sum);
             list.add(specialtyAndCollege);
         }
         map.put("success", true);

@@ -17,12 +17,12 @@ public class OrganizationNumServiceImpl implements OrganizationNumService {
     OrganizationNumMapper organizationNumMapper;
 
     @Override
-    public Integer getcollegeCount(Integer collegeId) {
+    public Integer[] getcollegeCount(Integer collegeId) {
         return organizationNumMapper.queryCountByCollegeId(collegeId);
     }
 
     @Override
-    public Integer getspecialtyCount(Integer specialtyId) {
+    public Integer[] getspecialtyCount(Integer specialtyId) {
         return organizationNumMapper.queryCountByspecialtyId(specialtyId);
     }
 

@@ -37,7 +37,7 @@ public interface OrganizationNumMapper {
      * @return
      */
     @Select("select sum from organization_num where college_id=#{collegeId}")
-    Integer queryCountByCollegeId(@Param("collegeId") Integer collegeId);
+    Integer[] queryCountByCollegeId(@Param("collegeId") Integer collegeId);
 
     /**
      * 删除学院人数记录
@@ -55,7 +55,7 @@ public interface OrganizationNumMapper {
      * @return
      */
     @Select("select sum from organization_num where specialty_id=#{specialtyId}")
-    Integer queryCountByspecialtyId(@Param("specialtyId") Integer specialtyId);
+    Integer[] queryCountByspecialtyId(@Param("specialtyId") Integer specialtyId);
 
 
     /**
