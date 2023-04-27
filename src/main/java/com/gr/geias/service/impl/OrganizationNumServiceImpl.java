@@ -33,12 +33,13 @@ public class OrganizationNumServiceImpl implements OrganizationNumService {
 
     @Override
     public Boolean updateClassGradesum(OrganizationNum organizationNum) {
-        Integer integer = organizationNumMapper.updateNumByClassGradeId(organizationNum.getSum(), organizationNum.getClassId());
-        if (integer > 0) {
-            return true;
-        } else {
-            return false;
-        }
+//        Integer integer = organizationNumMapper.updateNumByClassGradeId(organizationNum.getSum(), organizationNum.getClassId());
+//        if (integer > 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+        return true;
     }
 
     @Override

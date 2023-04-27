@@ -17,15 +17,4 @@
         insert into specialty(specialty_name,create_time,college_id) values(#{specialty.specialtyName},#{specialty.createTime},#{specialty.collegeId})
     </update>
 
-    <select id="queryCountSpecialty" resultType="int">
-select
-    SUM(n.sum)
-from
-      specialty s,
-      organization_num n,
-      clazz cg
-where s.specialty_id = cg.specialty_id
-  and cg.class_id = n.class_id
-  and s.specialty_id=#{specialtyId};
-    </select>
 </mapper>

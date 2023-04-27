@@ -90,7 +90,6 @@ public class ClassGradeServiceImpl implements ClassGradeService {
         } catch (Exception e) {
             throw new RuntimeException("更新错误");
         }
-
     }
 
     @Override

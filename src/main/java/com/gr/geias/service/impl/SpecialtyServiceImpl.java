@@ -47,7 +47,7 @@ public class SpecialtyServiceImpl implements SpecialtyService {
             organizationNum.setSpecialtyId(specialty.getSpecialtyId());
             organizationNumMapper.insertOrganizationNum(organizationNum);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("添加专业失败");
         }
@@ -56,12 +56,13 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     @Override
     public Boolean updateSpecialty(Specialty specialty) {
         Integer integer = specialtyMapper.updateSpecialty(specialty);
-        if (integer>0){
+        if (integer > 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
+
     @Override
     @Transactional
     public Boolean delSpecialty(Integer specialtyId) {
@@ -73,12 +74,12 @@ public class SpecialtyServiceImpl implements SpecialtyService {
             }
             Integer integer1 = specialtyMapper.delSpecialty(specialtyId);
 
-            if (integer>0 && integer1>0){
+            if (integer > 0 && integer1 > 0) {
                 return true;
-            }else {
+            } else {
                 throw new RuntimeException("删除时失败");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -92,15 +93,16 @@ public class SpecialtyServiceImpl implements SpecialtyService {
     @Transactional
     public Integer getAndSetSpecialtyCount(Integer specialtyId) {
         try {
-            Integer integer = specialtyMapper.queryCountSpecialty(specialtyId);
-            if (integer == null) {
-                integer = 0;
+            Integer[] integers = specialtyMapper.queryCountSpecialty(specialtyId);
+            int sum = 0;
+            for (Integer integer : integers) {
+                sum += integer;
             }
-            Integer integer1 = organizationNumMapper.updataOrganizationNumBySpecialtyId(integer, specialtyId);
-            if (integer1 <= 0) {
-                throw new Exception();
-            }
-            return integer;
+//            Integer integer = organizationNumMapper.updataOrganizationNumBySpecialtyId(sum, specialtyId);
+//            if (integer <= 0) {
+//                throw new Exception();
+//            }
+            return sum;
         } catch (Exception e) {
             throw new RuntimeException("查询并持久化失败");
         }
