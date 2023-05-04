@@ -80,8 +80,8 @@ public class ClassGradeServiceImpl implements ClassGradeService {
         try {
             Integer integer = classGradeMapper.updateClassGrede(classGrade);
             Integer integer1 = organizationNumMapper.updateNumByClassGradeId(sum, classGrade.getClassId());
-            collegeService.getAndSetcount(collegeId);
-            specialtyService.getAndSetSpecialtyCount(classGrade.getSpecialtyId());
+//            collegeService.getAndSetcount(collegeId);
+//            specialtyService.getAndSetSpecialtyCount(classGrade.getSpecialtyId());
             if (integer > 0 && integer1 > 0) {
                 return true;
             } else {
