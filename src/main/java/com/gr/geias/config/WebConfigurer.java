@@ -58,7 +58,7 @@ public class WebConfigurer implements WebMvcConfigurer {
                         , "/organizationcontroller/delperson_1"
                         , "/organizationcontroller/getperson_1"
                         , "/organizationcontroller/updateperson_1"
-                        , "/organizationcontroller/addperson_1");
+                        , "/organizationcontroller/addperson_1").excludePathPatterns("/personinfo/logout");
 
         registry.addInterceptor(specialtyIntercepetor).addPathPatterns("/organizationcontroller/updatespecialty", "/organizationcontroller/delspecialty");
         registry.addInterceptor(classGradeInterceptor).addPathPatterns("/organizationcontroller/getclassgrade", "/organizationcontroller/addclassgrade", "/organizationcontroller/updateclassgrade", "/organizationcontroller/delclassgrade");
