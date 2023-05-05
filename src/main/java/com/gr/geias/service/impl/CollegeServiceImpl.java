@@ -68,7 +68,7 @@ public class CollegeServiceImpl implements CollegeService {
         if (integer == null) {
             integer = 0;
         }
-        organizationNumMapper.updataOrganizationNumByCollegeId(integer, collegeId);
+//        organizationNumMapper.updataOrganizationNumByCollegeId(integer, collegeId);
         return integer;
     }
 
