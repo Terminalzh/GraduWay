@@ -3,7 +3,6 @@ package com.gr.geias.service.impl;
 import com.gr.geias.entity.ClassGrade;
 import com.gr.geias.entity.EmploymentInformation;
 import com.gr.geias.entity.OrganizationNum;
-import com.gr.geias.entity.Specialty;
 import com.gr.geias.mapper.ClassGradeMapper;
 import com.gr.geias.mapper.EmploymentInformationMapper;
 import com.gr.geias.mapper.OrganizationNumMapper;
@@ -11,12 +10,10 @@ import com.gr.geias.mapper.SpecialtyMapper;
 import com.gr.geias.service.ClassGradeService;
 import com.gr.geias.service.CollegeService;
 import com.gr.geias.service.SpecialtyService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.EmptyStackException;
 import java.util.List;
 
 /**
