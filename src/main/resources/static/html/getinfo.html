@@ -34,7 +34,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名" autocomplete="off"
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名"
+                       autocomplete="off"
                        class="layui-input">
             </div>
         </div>
@@ -48,15 +49,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">是否就业</label>
             <div class="layui-input-block">
-                <input type="radio" name="jiuye" lay-filter="jiuye" value="1" title="以就业">
-                <input type="radio" name="jiuye" lay-filter="jiuye" value="0" title="未就业" checked>
+                <input type="radio" name="jiuye" lay-filter="jiuye" value="1" title="以就业" checked>
+                <input type="radio" name="jiuye" lay-filter="jiuye" value="0" title="未就业">
             </div>
         </div>
-        <div id="yijiuye" style="display:none">
+        <div id="yijiuye">
             <div class="layui-form-item">
                 <label class="layui-form-label">学院</label>
                 <div class="layui-input-block">
-                    <select id="college" name="college" lay-filter="college" lay-verify="required" lay-search>
+                    <select id="college" name="college" lay-filter="college" lay-verify="" lay-search>
 
                     </select>
                 </div>
@@ -64,7 +65,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">专业</label>
                 <div class="layui-input-block">
-                    <select id="specialty" name="specialty" lay-filter="specialty" lay-verify="required" lay-search>
+                    <select id="specialty" name="specialty" lay-filter="specialty" lay-verify="" lay-search>
 
                     </select>
                 </div>
@@ -72,48 +73,52 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">班级</label>
                 <div class="layui-input-block">
-                    <select id="classgrade" name="classgrade" lay-verify="required" lay-search>
+                    <select id="classgrade" name="classgrade" lay-verify="" lay-search>
 
                     </select>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">就业地区</label>
-                <div class="layui-input-block">
-                    <select id="area" name="area" lay-verify="required" lay-search>
+            <div id="employment">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">就业地区</label>
+                    <div class="layui-input-block">
+                        <select id="area" name="area" lay-verify="" lay-search>
 
-                    </select>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">职业属性</label>
-                <div class="layui-input-block">
-                    <select id="unitkind" name="unitkind" lay-verify="required" lay-search>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">职业属性</label>
+                    <div class="layui-input-block">
+                        <select id="unitkind" name="unitkind" lay-verify="" lay-search>
 
-                    </select>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label">就业来源</label>
-                <div class="layui-input-block">
-                    <select id="employmentway" name="employmentway" lay-verify="required" lay-search>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">就业来源</label>
+                    <div class="layui-input-block">
+                        <select id="employmentway" name="employmentway" lay-verify="" lay-search>
 
-                    </select>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="layui-form-item">
-                <label class="layui-form-label">工资</label>
-                <div class="layui-input-block">
-                    <input id="salary" type="text" name="salary" required lay-verify="required" placeholder="请输入输入框内容"
-                           autocomplete="off"
-                           class="layui-input">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">工资</label>
+                    <div class="layui-input-block">
+                        <input id="salary" type="text" name="salary" required lay-verify=""
+                               placeholder="请输入输入框内容"
+                               autocomplete="off"
+                               class="layui-input">
+                    </div>
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button class="layui-btn" id="formDemo" name="formDemo" lay-submit lay-filter="formDemo">立即提交
+                </button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -125,74 +130,67 @@
         form.on('submit(formDemo)', function (data) {
             var field = data.field;
             var jiuye = field.jiuye;
-            if (jiuye == 0) {
-                layer.alert("提交成功", {
-                    icon: 5,
-                    title: "成功"
-                });
-            } else {
-                var studentNum = field.studentNum;
-                var name = field.name;
-                var gender = field.gender;
-                var college = field.college;
-                var specialty = field.specialty;
-                var classgrade = field.classgrade;
-                var area = field.area;
-                var unitkind = field.unitkind;
-                var employmentway = field.employmentway;
-                var salary = field.salary;
-                var fromData = new FormData();
-                fromData.append("studentNum", studentNum);
-                fromData.append("name", name);
-                fromData.append("gender", gender);
-                fromData.append("jiuye", jiuye);
-                fromData.append("collegeId", college);
-                fromData.append("specialtyId", specialty);
-                fromData.append("classId", classgrade);
-                fromData.append("areaId", area);
-                fromData.append("unitId", unitkind);
-                fromData.append("employmentwayId", employmentway);
-                fromData.append("salary", salary);
-                intoinfo(null);
+            var studentNum = field.studentNum;
+            var name = field.name;
+            var gender = field.gender;
+            var college = field.college;
+            var specialty = field.specialty;
+            var classgrade = field.classgrade;
+            var area = field.area;
+            var unitkind = field.unitkind;
+            var employmentway = field.employmentway;
+            var salary = field.salary;
+            var fromData = new FormData();
+            fromData.append("studentNum", studentNum);
+            fromData.append("name", name);
+            fromData.append("gender", gender);
+            fromData.append("jiuye", jiuye);
+            fromData.append("collegeId", college);
+            fromData.append("specialtyId", specialty);
+            fromData.append("classId", classgrade);
+            fromData.append("areaId", area);
+            fromData.append("unitId", unitkind);
+            fromData.append("employmentwayId", employmentway);
+            fromData.append("salary", salary);
+            intoinfo(fromData);
 
-                function intoinfo(update) {
-                    var url = '/info/addemploymentinfo';
-                    if (update != null) {
-                        url += '?update=' + update;
-                    }
-                    $.ajax({
-                        url: url,
-                        type: 'POST',
-                        data: fromData,
-                        contentType: false,
-                        processData: false,
-                        async: false,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.success) {
-                                layer.alert("提交成功", {
-                                    icon: 6,
-                                    title: "成功"
-                                });
-                            } else {
-                                if (data.writed) {
-                                    layer.alert(data.errMsg, {
-                                            icon: 6
-                                        },
-                                        function () {
-                                            intoinfo(true);
-                                        });
-                                } else {
-                                    layer.alert(data.errMsg, {
-                                        icon: 5,
-                                        title: "错误"
+            function intoinfo(update) {
+                var url = '/info/addemploymentinfo';
+                // if (update != null) {
+                //     url += '?update=' + update;
+                // }
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: update,
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                            layer.alert("提交成功", {
+                                icon: 6,
+                                title: "成功"
+                            });
+                        } else {
+                            if (data.writed) {
+                                layer.alert(data.errMsg, {
+                                        icon: 6
+                                    },
+                                    function () {
+                                        intoinfo(true);
                                     });
-                                }
+                            } else {
+                                layer.alert(data.errMsg, {
+                                    icon: 5,
+                                    title: "错误"
+                                });
                             }
                         }
+                    }
 
-                    });
-                }
+                });
             }
         });
         getInitData();
@@ -296,23 +294,25 @@
         }
 
         function initUnitAndWay(data) {
-            var html = '';
+            var html = '<option value="0" selected>请选择就业地区</option>';
             data.areaList.map(function (item, index) {
                 html += '<option value="' + item.areaId + '">' + item.areaName + '</option>';
             });
             $("#area").html(html);
-            html = '';
+
+            html = '<option value="0" selected>请选择就业来源</option>';
             data.employmentWayList.map(function (item, index) {
                 html += '<option value="' + item.employmentWayId + '">' + item.vayName + '</option>';
             });
             $("#employmentway").html(html);
 
-            html = '';
+            html = '<option value="0" selected>请选择就业属性</option>';
             data.unitKindList.map(function (item, index) {
                 html += '<option value="' + item.unitId + '">' + item.unitName + '</option>';
             });
             $("#unitkind").html(html);
             form.render('select');
+
         }
 
         form.on('select(college)', function (data) {
@@ -327,12 +327,12 @@
 
         form.on('radio(jiuye)', function (data) {
             if (data.value == 1) {
-                $("#yijiuye").show();
-                $("#weijiuye").hide();
+                $('#employment [lay-verify=""]').attr('lay-verify', 'required');
+                $("#employment").show();
                 form.render('select');
             } else {
-                $("#yijiuye").hide();
-                $("#weijiuye").show();
+                $('#employment [lay-verify="required"]').attr('lay-verify', "");
+                $("#employment").hide();
                 form.render('select');
             }
         });

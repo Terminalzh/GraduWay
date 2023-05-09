@@ -29,7 +29,7 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
                     <div class="layui-form-item">
-                        <form class="layui-form layui-col-space5" >
+                        <form class="layui-form layui-col-space5">
                             <div class="layui-input-inline layui-show-xs-block">
                                 <select id="area" lay-filter="area" name="contrller">
 
@@ -52,20 +52,28 @@
                             </div>
                             <div class="layui-input-inline layui-show-xs-block">
                                 <input id="name" type="text" name="username" placeholder="姓名" autocomplete="off"
-                                       class="layui-input"></div>
+                                       class="layui-input">
+                            </div>
                         </form>
-                        <div class="layui-input-inline layui-show-xs-block" style="width:50px;height: 30px;margin-top: 2px">
+                        <div class="layui-input-inline layui-show-xs-block"
+                             style="width:50px;height: 30px;margin-top: 2px">
                             <button class="layui-btn" id="infoto">
-                                <i class="layui-icon">&#xe615;</i></button>
+                                <i class="layui-icon">&#xe615;</i>
+                            </button>
+                        </div>
+                        <div>
+                            <button class="layui-btn">
+                                <a href="/html/getinfo.html" style="color: white;">添加学生</a>
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn" onclick="xadmin.open('选择需要的列导出','/page/toexcal',400,400)"><i
-                            class="layui-icon">&#xe73f;</i>导出到Excal
+                    <button class="layui-btn" onclick="xadmin.open('选择需要的列导出','/page/toexcal',400,400)">
+                        <i class="layui-icon">导出到Excel</i>
                     </button>
                 </div>
-                <div class="layui-card-body " style="width: 1100px" >
+                <div class="layui-card-body " style="width: 1100px">
                     <table class="layui-table layui-form" style="width: 1100px;table-layout:fixed;td：width:80px">
                         <thead>
                         <tr>
@@ -341,11 +349,11 @@
 
 
         $("#infoto").click(function () {
-             areaId = $($(".layui-this")[0]).attr("lay-value");
-             employmentWayId = $($(".layui-this")[1]).attr("lay-value");
-             unitId = $($(".layui-this")[2]).attr("lay-value");
-             levelId = $($(".layui-this")[3]).attr("lay-value");
-             name = $("#name").val();
+            areaId = $($(".layui-this")[0]).attr("lay-value");
+            employmentWayId = $($(".layui-this")[1]).attr("lay-value");
+            unitId = $($(".layui-this")[2]).attr("lay-value");
+            levelId = $($(".layui-this")[3]).attr("lay-value");
+            name = $("#name").val();
             loadList(1);
         });
 

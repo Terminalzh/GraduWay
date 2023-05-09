@@ -81,8 +81,8 @@
 
                         } else {
                             layer.alert(data.errMsg, {
-                                    icon: 6
-                                });
+                                icon: 6
+                            });
                         }
                     }
                 });
@@ -106,38 +106,38 @@
                     var collegeId = data.field.contrller;
                     var personname = data.field.personname;
 
-                    var url ='/organizationcontroller/addperson_o?personName='+personname+'&collegeId='+collegeId+'&username='+username+'&password='+password;
-                        $.ajax({
-                            url: url,
-                            type: "get",
-                            dataType: "json",
-                            async: false,
-                            success: function (data) {
-                                if (data.success) {
-                                    layer.alert("增加成功", {
-                                            icon: 6
-                                        },
-                                        function () {
-                                            // 获得frame索引
-                                            var index = parent.layer.getFrameIndex(window.name);
-                                            //关闭当前frame
-                                            parent.layer.close(index);
-                                            parent.location.reload();
-                                        });
-                                } else {
-                                    layer.alert(data.errMsg, {
-                                            icon: 6
-                                        },
-                                        function () {
-                                            // 获得frame索引
-                                            var index = parent.layer.getFrameIndex(window.name);
-                                            //关闭当前frame
-                                            parent.layer.close(index);
-                                            parent.location.reload();
-                                        });
-                                }
+                    var url = '/organizationcontroller/addperson_o?personName=' + personname + '&collegeId=' + collegeId + '&username=' + username + '&password=' + password;
+                    $.ajax({
+                        url: url,
+                        type: "get",
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
+                            if (data.success) {
+                                layer.alert("增加成功", {
+                                        icon: 6
+                                    },
+                                    function () {
+                                        // 获得frame索引
+                                        var index = parent.layer.getFrameIndex(window.name);
+                                        //关闭当前frame
+                                        parent.layer.close(index);
+                                        parent.location.reload();
+                                    });
+                            } else {
+                                layer.alert(data.errMsg, {
+                                        icon: 6
+                                    },
+                                    function () {
+                                        // 获得frame索引
+                                        var index = parent.layer.getFrameIndex(window.name);
+                                        //关闭当前frame
+                                        parent.layer.close(index);
+                                        parent.location.reload();
+                                    });
                             }
-                        });
+                        }
+                    });
                     return false;
                 });
         });

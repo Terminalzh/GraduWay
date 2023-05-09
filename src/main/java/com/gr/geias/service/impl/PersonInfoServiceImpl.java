@@ -109,21 +109,21 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         try {
             JSONObject search = Faseutil.search(image);
             String error_msg = search.getString("error_msg");
-            if (error_msg.equals("SUCCESS")){
+            if (error_msg.equals("SUCCESS")) {
                 JSONObject result = search.getJSONObject("result");
                 JSONArray user_list = result.getJSONArray("user_list");
                 JSONObject jsonObject = user_list.getJSONObject(0);
                 double score = jsonObject.getDouble("score");
                 String user_id = jsonObject.getString("user_id");
-                if (score>90){
+                if (score > 90) {
                     return personInfoMapper.queryPersonById(Integer.parseInt(user_id));
-                }else {
+                } else {
                     return new PersonInfo();
                 }
-            }else {
+            } else {
                 return null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
