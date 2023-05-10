@@ -27,29 +27,31 @@ public class WebConfigurer implements WebMvcConfigurer {
     ClassGradeInterceptor classGradeInterceptor;
     @Autowired
     Person0Interceptor person0Interceptor;
+    @Autowired
+    LoginPageInterceptor loginPageInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/page/login", "/page/error", "/page/getinfo","/page/faseLogin")
-                .excludePathPatterns("/personinfo/login", "/info/**","/personinfo/faseLogin")
+                .excludePathPatterns("/page/login", "/page/error", "/page/getinfo", "/page/faseLogin")
+                .excludePathPatterns("/personinfo/login", "/info/**", "/personinfo/faseLogin")
                 .excludePathPatterns("/html/**", "/fonts/**", "/images/**", "/js/**", "/lib/**", "/css/**");
 
         registry.addInterceptor(adminInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/page/index", "/page/echarts1", "/page/memberlist", "/page/echarts4", "/page/echarts2", "/page/error", "/page/login", "/page/getinfo", "/page/welcome", "/page/personedit", "/page/toexcal","/page/faseLogin")
+                .excludePathPatterns("/page/index", "/page/echarts1", "/page/memberlist", "/page/echarts4", "/page/echarts2", "/page/error", "/page/login", "/page/getinfo", "/page/welcome", "/page/personedit", "/page/toexcal", "/page/faseLogin")
                 .excludePathPatterns("/init/getinit", "/init/getleve"
                         , "/employmentinformation/getemploymentinfo"
                         , "/employmentinformation/getcountbyemploymentway"
                         , "/employmentinformation/getcountbyunitkind"
                         , "/employmentinformation/getcountbyarea"
                         , "/personinfo/login"
-                        ,"/personinfo/faseLogin"
+                        , "/personinfo/faseLogin"
                         , "/info/**"
                         , "/welcome/**"
                         , "/personinfo/getuser"
                         , "/personinfo/updateuser"
                         , "/employmentinformation/download"
-                        ,"/personinfo/addFase")
+                        , "/personinfo/addFase")
                 .excludePathPatterns("/html/**", "/fonts/**", "/images/**", "/js/**", "/lib/**", "/css/**");
         registry.addInterceptor(superAdminInterceptor).addPathPatterns("/page/organizationlist", "/page/collegeadd", "/page/collegeedit", "/page/person_1_list", "/page/person1add", "/page/person_1_edit")
                 .addPathPatterns("/organizationcontroller/delcollege"
@@ -65,5 +67,6 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(specialtyIntercepetor).addPathPatterns("/organizationcontroller/updatespecialty", "/organizationcontroller/delspecialty");
         registry.addInterceptor(classGradeInterceptor).addPathPatterns("/organizationcontroller/getclassgrade", "/organizationcontroller/addclassgrade", "/organizationcontroller/updateclassgrade", "/organizationcontroller/delclassgrade");
         registry.addInterceptor(person0Interceptor).addPathPatterns("/organizationcontroller/getpersonById", "/organizationcontroller/updateperson_0", "/organizationcontroller/delperson_0");
+        registry.addInterceptor(loginPageInterceptor).addPathPatterns("/page/login", "/page/faseLogin");
     }
 }

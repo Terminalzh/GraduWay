@@ -41,40 +41,36 @@ public class PersonInfoController {
                                      @RequestParam(value = "password", required = false) String password,
                                      HttpServletRequest request,
                                      HttpServletResponse response
-    ) {
-        PersonInfo personById = null;
-        PersonInfo login;
+    ) throws IOException {
+        PersonInfo login = null;
         if (request.getAttribute("personId") != null) {
             Integer personId = Integer.parseInt((String) request.getAttribute("personId"));
-            personById = personInfoService.getPersonById(personId);
+            login = personInfoService.getPersonById(personId);
         }
         Map<String, Object> map = new HashMap<>(3);
-        if (username == null || username.equals("") || password == null || password.equals("")) {
-            map.put("success", false);
-            map.put("errMsg", "用户名或者密码为空");
-        } else {
-            if (personById != null)
-                login = personById;
-            else
-                login = personInfoService.login(username, password);
-            if (login != null) {
-                request.getSession().setAttribute("person", login);
-                if (login.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
-                    List<Specialty> specialtyList = specialtyService.getSpecialty(login.getCollegeId());
-                    List<PersonInfo> person0 = personInfoService.getPersonByCollegeId(login.getCollegeId());
-                    request.getSession().setAttribute("person0List", person0);
-                    request.getSession().setAttribute("specialtyList", specialtyList);
-                }
-                if (personById == null) {
-                    Cookie cookie = new Cookie("personId", login.getPersonId().toString());
-                    cookie.setMaxAge(60 * 60 * 24 * 365);
-                    response.addCookie(cookie);
-                }
-                map.put("success", true);
-            } else {
+        if (login == null) {
+            if (username == null || username.equals("") || password == null || password.equals("")) {
                 map.put("success", false);
-                map.put("errMsg", "用户名或者密码错误");
+                map.put("errMsg", "用户名或者密码为空");
             }
+            login = personInfoService.login(username, password);
+        }
+        if (login != null) {
+            request.getSession().setAttribute("person", login);
+            if (login.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
+                List<Specialty> specialtyList = specialtyService.getSpecialty(login.getCollegeId());
+                List<PersonInfo> person0 = personInfoService.getPersonByCollegeId(login.getCollegeId());
+                request.getSession().setAttribute("person0List", person0);
+                request.getSession().setAttribute("specialtyList", specialtyList);
+            }
+            Cookie cookie = new Cookie("personId", login.getPersonId().toString());
+            cookie.setMaxAge(60 * 60 * 24 * 365);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            map.put("success", true);
+        } else {
+            map.put("success", false);
+            map.put("errMsg", "用户名或者密码错误");
         }
         return map;
     }
@@ -84,14 +80,10 @@ public class PersonInfoController {
         request.getSession().removeAttribute("person");
         request.getSession().removeAttribute("person0List");
         request.getSession().removeAttribute("specialtyList");
-        Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("personId")) {
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
-                break;
-            }
-        }
+        Cookie cookie = new Cookie("personId", null);
+        cookie.setMaxAge(1);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         try {
             response.sendRedirect("/html/login.html");
         } catch (IOException e) {
