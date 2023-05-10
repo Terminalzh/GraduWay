@@ -68,6 +68,9 @@ public class PersonInfoController {
             cookie.setPath("/");
             response.addCookie(cookie);
             map.put("success", true);
+            if (request.getAttribute("isForward") != null) {
+                response.sendRedirect("/page/index");
+            }
         } else {
             map.put("success", false);
             map.put("errMsg", "用户名或者密码错误");

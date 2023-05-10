@@ -15,6 +15,7 @@ public class LoginPageInterceptor implements HandlerInterceptor {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("personId")) {
                 request.setAttribute("personId", cookie.getValue());
+                request.setAttribute("isForward", new Object());
                 request.getRequestDispatcher("/personinfo/login").forward(request, response);
                 return false;
             }

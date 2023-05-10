@@ -82,4 +82,3 @@ http://localhost:8080/
   ![image-20200326110252591](https://github.com/gr2222/image/blob/master/geias/学院管理员列表.png)
 
   ![image-20200326110252591](https://github.com/gr2222/image/blob/master/geias/各个学院辅导员列表.png)
-
