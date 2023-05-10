@@ -7,14 +7,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
- *
  * @author Terminal
+ * @version 1.0
  * @since 2023-05-06
- */@Repository
-public interface EmploymentWayMapper  {
+ */
+@Repository
+public interface EmploymentWayMapper {
     /**
      * 获取工作来源
      */

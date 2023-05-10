@@ -12,12 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 @Service
 public class PersonInfoServiceImpl implements PersonInfoService {
@@ -70,7 +67,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
 
     @Override
     public Boolean delPerson(Integer personId) {
-        Integer integer = personInfoMapper.delPersonById(personId);
+        Integer integer = personInfoMapper.deletePersonById(personId);
         if (integer > 0) {
             return true;
         } else {

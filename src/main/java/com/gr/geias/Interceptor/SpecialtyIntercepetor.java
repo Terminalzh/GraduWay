@@ -1,6 +1,5 @@
 package com.gr.geias.Interceptor;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gr.geias.entity.PersonInfo;
 import com.gr.geias.entity.Specialty;
 import com.gr.geias.enums.EnableStatusEnums;
@@ -9,16 +8,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-11 14:59
+ * @since 2023-05-06
  */
 @Component
 public class SpecialtyIntercepetor implements HandlerInterceptor {

@@ -9,9 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Mapper 接口
- *
  * @author Terminal
+ * @version 1.0
  * @since 2023-05-06
  */
 @Repository

@@ -5,9 +5,9 @@ import com.gr.geias.entity.PersonInfo;
 import lombok.Data;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-08 20:05
+ * @since 2023-05-06
  */
 @Data
 public class CollegeAndPerson {

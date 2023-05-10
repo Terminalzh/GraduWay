@@ -8,12 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>
- * Mapper 接口
- * </p>
- *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 @Repository
 public interface CollegeMapper {

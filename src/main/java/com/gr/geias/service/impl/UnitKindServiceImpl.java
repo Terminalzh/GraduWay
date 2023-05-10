@@ -9,12 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 @Service
 public class UnitKindServiceImpl implements UnitKindService {

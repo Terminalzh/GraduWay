@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-11 15:50
+ * @since 2023-05-06
  */
 @Component
 public class ClassGradeInterceptor implements HandlerInterceptor {

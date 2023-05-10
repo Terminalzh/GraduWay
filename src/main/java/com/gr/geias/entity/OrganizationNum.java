@@ -3,9 +3,9 @@ package com.gr.geias.entity;
 import lombok.Data;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-09 09:03
+ * @since 2023-05-06
  */
 @Data
 public class OrganizationNum {

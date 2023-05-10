@@ -3,9 +3,9 @@ package com.gr.geias.dto;
 import lombok.Data;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-08 13:50
+ * @since 2023-05-06
  */
 @Data
 public class AreaCount {

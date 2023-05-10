@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-12 18:03
+ * @since 2023-05-06
  */
 @RestController
 @RequestMapping("/info")

@@ -23,12 +23,11 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * <p>
  * 前端控制器
- * </p>
  *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 @RestController
 @RequestMapping("/employmentinformation")
@@ -45,7 +44,8 @@ public class EmploymentInformationController {
     ExcalUtil excalUtil;
 
     /**
-     *  获取毕业生就业信息列表 权限 0，1，2
+     * 获取毕业生就业信息列表 权限 0，1，2
+     *
      * @param pageNum
      * @param areaId
      * @param employmentWayId
@@ -66,7 +66,7 @@ public class EmploymentInformationController {
                           @RequestParam(value = "name", required = false) String name,
                           @RequestParam(value = "salary", required = false) String salary,
                           HttpServletRequest request) {
-        Map<String,Object> map = new HashMap<>(3);
+        Map<String, Object> map = new HashMap<>(3);
         PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
         EmploymentInformation employmentInformation = new EmploymentInformation();
         if (areaId != null) {
@@ -113,11 +113,11 @@ public class EmploymentInformationController {
         }
         EmploymentInformationMsg employmentInfoList =
                 informationService.getEmploymentInfoList(employmentInformation, pageNum, person, a);
-        if (employmentInfoList.getSuccess()){
+        if (employmentInfoList.getSuccess()) {
             map.put("success", true);
             map.put("list", employmentInfoList.getList());
             map.put("count", employmentInfoList.getCount());
-        }else {
+        } else {
             map.put("success", false);
             map.put("errMsg", "出现错误");
         }
@@ -126,30 +126,31 @@ public class EmploymentInformationController {
 
     /**
      * 获取 地区数量 列表 权限 0，1，2
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value = "/getcountbyarea",method = RequestMethod.GET)
-    public Map<String,Object> getCountByArea(HttpServletRequest request){
-        PersonInfo person = (PersonInfo)request.getSession().getAttribute("person");
+    @RequestMapping(value = "/getcountbyarea", method = RequestMethod.GET)
+    public Map<String, Object> getCountByArea(HttpServletRequest request) {
+        PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
         List<Area> areaList = areaService.getArea(null);
-        Map<String,Object> ruslt = new HashMap<>(2);
+        Map<String, Object> ruslt = new HashMap<>(2);
         List<AreaCount> list = new ArrayList<>(36);
-        try{
+        try {
             EmploymentInformation employmentInformation = new EmploymentInformation();
             for (int i = 0; i < areaList.size(); i++) {
-            Area area = areaList.get(i);
-            employmentInformation.setArea(area);
-            Integer count = informationService.getCount(employmentInformation, person,null);
-            AreaCount areaCount = new AreaCount();
-            areaCount.setName(area.getAreaName());
-            areaCount.setValue(count);
-            list.add(areaCount);
-        }
-        ruslt.put("success", true);
-        ruslt.put("map", list);
-        return ruslt;
-        }catch (Exception e){
+                Area area = areaList.get(i);
+                employmentInformation.setArea(area);
+                Integer count = informationService.getCount(employmentInformation, person, null);
+                AreaCount areaCount = new AreaCount();
+                areaCount.setName(area.getAreaName());
+                areaCount.setValue(count);
+                list.add(areaCount);
+            }
+            ruslt.put("success", true);
+            ruslt.put("map", list);
+            return ruslt;
+        } catch (Exception e) {
             ruslt.put("success", false);
             ruslt.put("errMsg", e.getMessage());
             return ruslt;
@@ -158,21 +159,22 @@ public class EmploymentInformationController {
 
     /**
      * 获取就业途径数量 列表 权限 0，1，2
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value = "/getcountbyemploymentway",method = RequestMethod.GET)
-    public Map<String,Object> getCountByEmploymentWay(HttpServletRequest request){
-        PersonInfo person = (PersonInfo)request.getSession().getAttribute("person");
+    @RequestMapping(value = "/getcountbyemploymentway", method = RequestMethod.GET)
+    public Map<String, Object> getCountByEmploymentWay(HttpServletRequest request) {
+        PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
         List<EmploymentWay> areaList = employmentWayService.getEmploymentWay();
-        Map<String,Object> ruslt = new HashMap<>(2);
+        Map<String, Object> ruslt = new HashMap<>(2);
         List<AreaCount> list = new ArrayList<>(6);
-        try{
+        try {
             EmploymentInformation employmentInformation = new EmploymentInformation();
             for (int i = 0; i < areaList.size(); i++) {
                 EmploymentWay employmentWay = areaList.get(i);
                 employmentInformation.setEmploymentWay(employmentWay);
-                Integer count = informationService.getCount(employmentInformation, person,null);
+                Integer count = informationService.getCount(employmentInformation, person, null);
                 AreaCount areaCount = new AreaCount();
                 areaCount.setName(employmentWay.getVayName());
                 areaCount.setValue(count);
@@ -181,7 +183,7 @@ public class EmploymentInformationController {
             ruslt.put("success", true);
             ruslt.put("map", list);
             return ruslt;
-        }catch (Exception e){
+        } catch (Exception e) {
             ruslt.put("success", false);
             ruslt.put("errMsg", e.getMessage());
             return ruslt;
@@ -191,23 +193,24 @@ public class EmploymentInformationController {
 
     /**
      * 获取 职业分类 数量 列表 0，1，2
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value = "/getcountbyunitkind",method = RequestMethod.GET)
-    public Map<String,Object> getCountByUnitKind(HttpServletRequest request){
-        PersonInfo person = (PersonInfo)request.getSession().getAttribute("person");
+    @RequestMapping(value = "/getcountbyunitkind", method = RequestMethod.GET)
+    public Map<String, Object> getCountByUnitKind(HttpServletRequest request) {
+        PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
         List<UnitKind> areaList = unitKindService.getUnitKind();
-        Map<String,Object> ruslt = new HashMap<>(2);
+        Map<String, Object> ruslt = new HashMap<>(2);
         List<AreaCount> list = new ArrayList<>(6);
         List<String> stringList = new ArrayList<>(6);
-        try{
+        try {
             EmploymentInformation employmentInformation = new EmploymentInformation();
             for (int i = 0; i < areaList.size(); i++) {
                 UnitKind unitKind = areaList.get(i);
                 stringList.add(unitKind.getUnitName());
                 employmentInformation.setUnitKind(unitKind);
-                Integer count = informationService.getCount(employmentInformation, person,null);
+                Integer count = informationService.getCount(employmentInformation, person, null);
                 AreaCount areaCount = new AreaCount();
                 areaCount.setName(unitKind.getUnitName());
                 areaCount.setValue(count);
@@ -217,7 +220,7 @@ public class EmploymentInformationController {
             ruslt.put("map", list);
             ruslt.put("nameList", stringList);
             return ruslt;
-        }catch (Exception e){
+        } catch (Exception e) {
             ruslt.put("success", false);
             ruslt.put("errMsg", e.getMessage());
             return ruslt;
@@ -228,27 +231,28 @@ public class EmploymentInformationController {
 
     /**
      * 导出数据
+     *
      * @param response
      * @param request
      */
-    @RequestMapping(value = "/download",method = RequestMethod.GET)
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
     public void download(HttpServletResponse response,
                          HttpServletRequest request,
-                         @RequestParam(value = "id",required = false)String id,
-                         @RequestParam(value = "studentNum",required = false)String studentNum,
-                         @RequestParam(value = "name",required = false)String name,
-                         @RequestParam(value = "gender",required = false)String gender,
-                         @RequestParam(value = "class",required = false)String classGrade,
-                         @RequestParam(value = "specialty",required = false)String specialty,
-                         @RequestParam(value = "college",required = false)String college,
-                         @RequestParam(value = "area",required = false)String area,
-                         @RequestParam(value = "unit",required = false)String unit,
-                         @RequestParam(value = "way",required = false)String way,
-                         @RequestParam(value = "salary",required = false)String salary){
-        PersonInfo personInfo = (PersonInfo)request.getSession().getAttribute("person");
+                         @RequestParam(value = "id", required = false) String id,
+                         @RequestParam(value = "studentNum", required = false) String studentNum,
+                         @RequestParam(value = "name", required = false) String name,
+                         @RequestParam(value = "gender", required = false) String gender,
+                         @RequestParam(value = "class", required = false) String classGrade,
+                         @RequestParam(value = "specialty", required = false) String specialty,
+                         @RequestParam(value = "college", required = false) String college,
+                         @RequestParam(value = "area", required = false) String area,
+                         @RequestParam(value = "unit", required = false) String unit,
+                         @RequestParam(value = "way", required = false) String way,
+                         @RequestParam(value = "salary", required = false) String salary) {
+        PersonInfo personInfo = (PersonInfo) request.getSession().getAttribute("person");
         try {
             Set<String> excludeColumn = excalUtil.getExcludeColumn(id, studentNum, name, gender, classGrade, specialty, college, area, unit, way, salary);
-            excalUtil.createExcal(response,personInfo,excludeColumn);
+            excalUtil.createExcal(response, personInfo, excludeColumn);
         } catch (IOException e) {
             e.printStackTrace();
         }

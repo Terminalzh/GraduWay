@@ -4,6 +4,11 @@ import com.gr.geias.entity.Area;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
+/**
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
+ */
 public class AreaSqlProvider {
     public static String queryArea(@Param("area") Area area) {
         return new SQL() {{

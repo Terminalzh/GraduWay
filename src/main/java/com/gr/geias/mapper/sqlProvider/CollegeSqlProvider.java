@@ -4,6 +4,11 @@ import com.gr.geias.entity.College;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
+/**
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
+ */
 public class CollegeSqlProvider {
     public static String queryCollegeByAdminId(@Param("adminId") Integer adminId) {
         return new SQL() {{

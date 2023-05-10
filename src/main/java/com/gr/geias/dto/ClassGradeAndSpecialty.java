@@ -6,9 +6,9 @@ import com.gr.geias.entity.Specialty;
 import lombok.Data;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-10 15:57
+ * @since 2023-05-06
  */
 @Data
 public class ClassGradeAndSpecialty {

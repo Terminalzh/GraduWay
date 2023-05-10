@@ -6,12 +6,13 @@ import com.gr.geias.entity.Specialty;
 import com.gr.geias.enums.EnableStatusEnums;
 import com.gr.geias.service.PersonInfoService;
 import com.gr.geias.service.SpecialtyService;
-import com.gr.geias.util.Faseutil;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,12 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
- * 前端控制器
- * </p>
- *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 @RestController
 @RequestMapping("/personinfo")
@@ -37,22 +35,28 @@ public class PersonInfoController {
 
     /**
      * 登录 权限 无权限者即可接入
-     *
-     * @param username
-     * @param password
-     * @param request
-     * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Map<String, Object> login(@RequestParam(value = "username") String username,
-                                     @RequestParam(value = "password") String password,
-                                     HttpServletRequest request) {
+    @RequestMapping(value = "/login")
+    public Map<String, Object> login(@RequestParam(value = "username", required = false) String username,
+                                     @RequestParam(value = "password", required = false) String password,
+                                     HttpServletRequest request,
+                                     HttpServletResponse response
+    ) {
+        PersonInfo personById = null;
+        PersonInfo login;
+        if (request.getAttribute("personId") != null) {
+            Integer personId = Integer.parseInt((String) request.getAttribute("personId"));
+            personById = personInfoService.getPersonById(personId);
+        }
         Map<String, Object> map = new HashMap<>(3);
         if (username == null || username.equals("") || password == null || password.equals("")) {
             map.put("success", false);
             map.put("errMsg", "用户名或者密码为空");
         } else {
-            PersonInfo login = personInfoService.login(username, password);
+            if (personById != null)
+                login = personById;
+            else
+                login = personInfoService.login(username, password);
             if (login != null) {
                 request.getSession().setAttribute("person", login);
                 if (login.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
@@ -60,6 +64,11 @@ public class PersonInfoController {
                     List<PersonInfo> person0 = personInfoService.getPersonByCollegeId(login.getCollegeId());
                     request.getSession().setAttribute("person0List", person0);
                     request.getSession().setAttribute("specialtyList", specialtyList);
+                }
+                if (personById == null) {
+                    Cookie cookie = new Cookie("personId", login.getPersonId().toString());
+                    cookie.setMaxAge(60 * 60 * 24 * 365);
+                    response.addCookie(cookie);
                 }
                 map.put("success", true);
             } else {
@@ -71,10 +80,18 @@ public class PersonInfoController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void logout(HttpServletRequest request,HttpServletResponse response) {
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().removeAttribute("person");
         request.getSession().removeAttribute("person0List");
         request.getSession().removeAttribute("specialtyList");
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("personId")) {
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                break;
+            }
+        }
         try {
             response.sendRedirect("/html/login.html");
         } catch (IOException e) {

@@ -6,12 +6,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 public interface PersonInfoService {
     /**

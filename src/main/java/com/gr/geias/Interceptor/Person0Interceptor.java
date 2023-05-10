@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-12 15:37
+ * @since 2023-05-06
  */
 @Component
 public class Person0Interceptor implements HandlerInterceptor {

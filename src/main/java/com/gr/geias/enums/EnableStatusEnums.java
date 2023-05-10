@@ -1,9 +1,9 @@
 package com.gr.geias.enums;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-07 13:15
+ * @since 2023-05-06
  */
 public enum EnableStatusEnums {
     TEACHER(0, "老师"), PREXY(1, "院长"),

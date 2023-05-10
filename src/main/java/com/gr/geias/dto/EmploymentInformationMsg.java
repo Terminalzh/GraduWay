@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-07 19:01
+ * @since 2023-05-06
  */
 @Data
 public class EmploymentInformationMsg {

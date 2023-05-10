@@ -18,9 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-13 21:33
+ * @since 2023-05-06
  */
 @Component
 public class ExcalUtil {

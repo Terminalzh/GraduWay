@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-11 14:29
+ * @since 2023-05-06
  */
 @Component
 public class SuperAdminInterceptor implements HandlerInterceptor {

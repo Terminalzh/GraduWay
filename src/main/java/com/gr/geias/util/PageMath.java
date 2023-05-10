@@ -1,9 +1,9 @@
 package com.gr.geias.util;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-02-16 09:20
+ * @since 2023-05-06
  */
 public class PageMath {
     /**

@@ -3,9 +3,9 @@ package com.gr.geias.service;
 import com.gr.geias.entity.OrganizationNum;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-09 09:13
+ * @since 2023-05-06
  */
 public interface OrganizationNumService {
     /**

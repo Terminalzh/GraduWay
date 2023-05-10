@@ -8,11 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * <p>
- * Mapper 接口
- * </p>
- *
  * @author Terminal
+ * @version 1.0
  * @since 2023-05-06
  */
 @Repository
@@ -73,7 +70,7 @@ public interface PersonInfoMapper {
      * 删除用户
      */
     @Delete("delete from person_info where person_id=#{personId}")
-    Integer delPersonById(@Param("personId") Integer personId);
+    Integer deletePersonById(@Param("personId") Integer personId);
 
     /**
      * 获取 权限为1的的用户

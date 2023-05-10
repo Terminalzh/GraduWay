@@ -3,7 +3,6 @@ package com.gr.geias.service.impl;
 import com.gr.geias.entity.ClassGrade;
 import com.gr.geias.entity.OrganizationNum;
 import com.gr.geias.entity.Specialty;
-import com.gr.geias.mapper.ClassGradeMapper;
 import com.gr.geias.mapper.OrganizationNumMapper;
 import com.gr.geias.mapper.SpecialtyMapper;
 import com.gr.geias.service.ClassGradeService;
@@ -15,12 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * <p>
- * 服务实现类
- * </p>
- *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
  */
 @Service
 public class SpecialtyServiceImpl implements SpecialtyService {

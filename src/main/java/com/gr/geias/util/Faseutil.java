@@ -6,9 +6,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020/5/20 6:01 下午
+ * @since 2023-05-06
  */
 public class Faseutil {
     private static AipFace instance;

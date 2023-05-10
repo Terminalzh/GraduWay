@@ -3,9 +3,9 @@ package com.gr.geias.util;
 import com.baidu.aip.face.AipFace;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020/5/20 3:35 下午
+ * @since 2023-05-06
  */
 
 public class SampleFactory {

@@ -4,6 +4,11 @@ import com.gr.geias.entity.PersonInfo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;
 
+/**
+ * @author Terminal
+ * @version 1.0
+ * @since 2023-05-06
+ */
 public class PersonInfoSqlProvider {
     public static String updatePersonInfoById(@Param("person") PersonInfo personInfo) {
         return new SQL() {{

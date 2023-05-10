@@ -4,9 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-06 14:12
+ * @since 2023-05-06
  */
 @Controller
 @RequestMapping("/page")
@@ -143,6 +143,7 @@ public class PageController {
 
     /**
      * 班级添加 权限 1，2
+     *
      * @return
      */
     @RequestMapping("/classgradeadd")
@@ -153,6 +154,7 @@ public class PageController {
 
     /**
      * 班级修改 权限 1，2
+     *
      * @return
      */
     @RequestMapping("/classgradeedit")
@@ -162,111 +164,133 @@ public class PageController {
 
     /**
      * 错误页面 权限 无
+     *
      * @return
      */
     @RequestMapping("/error")
-    public String error(){
+    public String error() {
         return "/html/error.html";
     }
 
     /**
      * 各个学院辅导员列表 权限 1（特定），2
+     *
      * @return
      */
     @RequestMapping("/person_0")
-    public String person0List(){
+    public String person0List() {
         return "/html/person_0-list.html";
     }
 
     /**
      * 添加辅导员 权限 1（特定），2
+     *
      * @return
      */
     @RequestMapping("/person_o_add")
-    public String person0Add(){
+    public String person0Add() {
         return "/html/person_o_add.html";
     }
 
     /**
      * 修改辅导员页面 权限 1（特定），2
+     *
      * @return
      */
     @RequestMapping("/person_0_edit")
-    public String person0Edit(){
+    public String person0Edit() {
         return "/html/person_0-edit.html";
     }
 
     /**
      * 学院管理员列表 权限 2
+     *
      * @return
      */
     @RequestMapping("/person_1_list")
-    public String person1List(){
+    public String person1List() {
         return "/html/person_1-list.html";
     }
 
     /**
-     *  添加 学院 管理 权限2
+     * 添加 学院 管理 权限2
+     *
      * @return
      */
     @RequestMapping("/person1add")
-    public String  person1Add(){
+    public String person1Add() {
         return "/html/person_1_add.html";
     }
 
     /**
      * 修改学院管理 权限2
+     *
      * @return
      */
     @RequestMapping("/person_1_edit")
-    public String person1Edit(){
+    public String person1Edit() {
         return "/html/person_1-edit.html";
     }
 
     /**
      * 收集毕业生信息 权限无
+     *
      * @return
      */
     @RequestMapping("/getinfo")
-    public String getInfo(){
+    public String getInfo() {
         return "/html/getinfo.html";
     }
 
     /**
      * 桌面页面 权限 1，2，3
+     *
      * @return
      */
     @RequestMapping("/welcome")
-    public String welcome(){
+    public String welcome() {
         return "/html/welcome.html";
     }
 
     /**
      * 修改用户信息 权限 1，2，3
+     *
      * @return
      */
     @RequestMapping("/personedit")
-    public String personedit(){return "/html/personedit.html";}
+    public String personedit() {
+        return "/html/personedit.html";
+    }
 
     /**
      * 导出到Excal 权限 1，2，3
+     *
      * @return
      */
     @RequestMapping("/toexcal")
-    public String toExcal(){return "/html/toExcal.html";}
+    public String toExcal() {
+        return "/html/toExcal.html";
+    }
 
     /**
      * 读取组织架构 权限 2，3
+     *
      * @return
      */
     @RequestMapping("/echarts3")
-    public String echarts3(){return "/html/echarts3.html";}
+    public String echarts3() {
+        return "/html/echarts3.html";
+    }
 
     @RequestMapping("/fase")
-    public String fase(){return "/html/fase.html";}
+    public String fase() {
+        return "/html/fase.html";
+    }
 
     @RequestMapping("/faseLogin")
-    public String faseLogin(){return "/html/faseLogin.html";}
+    public String faseLogin() {
+        return "/html/faseLogin.html";
+    }
 
 }
 
