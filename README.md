@@ -1,5 +1,7 @@
 # 基于SpringBoot Mybatis  的毕业生就业分析系统
 
+http://localhost:8080/
+
 ---
 
 ## 用到的技术：

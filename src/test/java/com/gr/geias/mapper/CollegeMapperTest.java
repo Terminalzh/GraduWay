@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author maitentai
  * @version 1.0
@@ -40,7 +38,7 @@ class CollegeMapperTest extends GeiasApplicationTests {
 
     @Test
     void quereyCollegeCount1() {
-        Integer integer = collegeMapper.quereyCollegeCount(2);
+        Integer integer = collegeMapper.queryCollegeCountById(2);
         System.out.println(integer);
     }
 }

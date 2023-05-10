@@ -164,8 +164,11 @@
     <insert id="insertEmploymentInformation" useGeneratedKeys="true" keyColumn="information_id"
             keyProperty="informationId">
         insert into employment_information
-        (student_num, name, class_id, area_id, unit_id, salary, employment_way_id,create_time, gender, college_id, specialty_id)
-        values (#{info.studentNum},#{info.name},#{info.classGrade.classId},#{info.area.areaId},#{info.unitKind.unitId},#{info.salary},#{info.employmentWay.employmentWayId},#{info.createTime},#{info.gender},#{info.college.collegeId},#{info.specialty.specialtyId});
+        (student_num, name, class_id, area_id, unit_id, salary, employment_way_id, create_time, gender, college_id,
+         specialty_id)
+        values (#{info.studentNum}, #{info.name}, #{info.classGrade.classId}, #{info.area.areaId},
+                #{info.unitKind.unitId}, #{info.salary}, #{info.employmentWay.employmentWayId}, #{info.createTime},
+                #{info.gender}, #{info.college.collegeId}, #{info.specialty.specialtyId});
     </insert>
 
     <delete id="delEmploymentInformation" parameterType="com.gr.geias.entity.EmploymentInformation">
@@ -182,7 +185,7 @@
             </if>
         </where>
     </delete>
-    <update id="updayeInfo" parameterType="com.gr.geias.entity.EmploymentInformation">
+    <update id="updateInfo" parameterType="com.gr.geias.entity.EmploymentInformation">
         update employment_information
         <set>
             <if test="info.studentNum!=null">

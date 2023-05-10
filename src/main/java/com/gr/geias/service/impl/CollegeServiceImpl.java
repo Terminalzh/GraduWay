@@ -36,7 +36,7 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Override
     public List<College> getCollege(Integer adminId) {
-        return collegeMapper.queryCollege(adminId);
+        return collegeMapper.queryCollegeByAdminId(adminId);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class CollegeServiceImpl implements CollegeService {
             PersonInfo personInfo = new PersonInfo();
             personInfo.setPersonId(college.getAdminId());
             personInfo.setCollegeId(college.getCollegeId());
-            Integer integer = personInfoMapper.updatePerseonofCollege(personInfo);
+            Integer integer = personInfoMapper.updateCollegeIdByPersonId(personInfo);
             OrganizationNum organizationNum = new OrganizationNum();
             organizationNum.setCollegeId(college.getCollegeId());
             organizationNum.setSum(0);
@@ -64,7 +64,7 @@ public class CollegeServiceImpl implements CollegeService {
 
     @Override
     public Integer getAndSetcount(Integer collegeId) {
-        Integer integer = collegeMapper.quereyCollegeCount(collegeId);
+        Integer integer = collegeMapper.queryCollegeCountById(collegeId);
         if (integer == null) {
             integer = 0;
         }
@@ -82,12 +82,12 @@ public class CollegeServiceImpl implements CollegeService {
                 PersonInfo personInfo = new PersonInfo();
                 personInfo.setPersonId(college1.getAdminId());
                 personInfo.setCollegeId(null);
-                personInfoMapper.updatePerseonofCollege(personInfo);
+                personInfoMapper.updateCollegeIdByPersonId(personInfo);
                 collegeMapper.updateCollege(college);
                 PersonInfo personInfo1 = new PersonInfo();
                 personInfo1.setPersonId(college.getAdminId());
                 personInfo1.setCollegeId(college.getCollegeId());
-                personInfoMapper.updatePerseonofCollege(personInfo1);
+                personInfoMapper.updateCollegeIdByPersonId(personInfo1);
                 return true;
             }catch (Exception e){
                 throw  new RuntimeException("修改时出错");
@@ -107,13 +107,13 @@ public class CollegeServiceImpl implements CollegeService {
             PersonInfo personInfo = new PersonInfo();
             personInfo.setCollegeId(null);
             personInfo.setPersonId(college.getAdminId());
-            personInfoMapper.updatePerseonofCollege(personInfo);
+            personInfoMapper.updateCollegeIdByPersonId(personInfo);
             List<Specialty> specialty = specialtyService.getSpecialty(collegeId);
             for (int i = 0; i < specialty.size(); i++) {
                 specialtyService.delSpecialty(specialty.get(i).getSpecialtyId());
             }
-            personInfoMapper.delPerson(collegeId);
-            collegeMapper.delCollegeById(collegeId);
+            personInfoMapper.deletePersonByCollegeId(collegeId);
+            collegeMapper.deleteCollegeById(collegeId);
             return true;
         }catch (Exception e){
             throw new RuntimeException("删除出错,请重试");

@@ -2,16 +2,12 @@ package com.gr.geias.mapper;
 
 import com.gr.geias.GeiasApplicationTests;
 import com.gr.geias.entity.*;
-import org.apache.ibatis.annotations.Param;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author maitentai
@@ -70,7 +66,7 @@ class EmploymentInformationMapperTest extends GeiasApplicationTests {
             int ewint = random.nextInt(ew.length);
             EmploymentWay employmentWay = new EmploymentWay();
             employmentWay.setEmploymentWayId(ew[ewint]);
-            Integer integer = classGradeMapper.queryspecialtyId(cg[cgint]);
+            Integer integer = classGradeMapper.querySpecialtyById(cg[cgint]);
             Specialty specialty = new Specialty();
             specialty.setSpecialtyId(integer);
             Integer integer2 = specialtyMapper.queryCollegeId(integer);

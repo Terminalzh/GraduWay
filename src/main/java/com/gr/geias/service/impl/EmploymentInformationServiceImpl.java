@@ -54,11 +54,11 @@ public class EmploymentInformationServiceImpl implements EmploymentInformationSe
 
     @Override
     public EmploymentInformation getInfoByStudentNum(Integer studentNum) {
-        return informationMapper.qureyInfoByStudentNum(studentNum);
+        return informationMapper.queryInfoByStudentNum(studentNum);
     }
 
     @Override
     public Integer updateInfo(EmploymentInformation employmentInformation) {
-        return informationMapper.updayeInfo(employmentInformation);
+        return informationMapper.updateInfo(employmentInformation);
     }
 }

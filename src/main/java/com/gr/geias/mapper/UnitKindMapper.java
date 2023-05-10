@@ -8,16 +8,16 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
- * @author maotentai
- * @since 2020-03-06
- */@Repository
+ * @author Terminal
+ * @since 2023-05-06
+ */
+@Repository
 public interface UnitKindMapper {
     /**
      * 查询工作分类
-     * @return
      */
     @Select("select * from unit_kind")
     List<UnitKind> queryUnitKind();

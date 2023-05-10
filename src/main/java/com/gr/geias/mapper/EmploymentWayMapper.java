@@ -11,13 +11,12 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @since 2023-05-06
  */@Repository
 public interface EmploymentWayMapper  {
     /**
      * 获取工作来源
-     * @return
      */
     @Select("select * from employment_way")
     List<EmploymentWay> queryEmploymentWay();

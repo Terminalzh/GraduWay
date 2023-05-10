@@ -4,18 +4,15 @@ import com.gr.geias.entity.EmploymentInformation;
 import com.gr.geias.entity.PersonInfo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * <p>
  * Mapper 接口
- * </p>
  *
- * @author maotentai
- * @since 2020-03-06
+ * @author Terminal
+ * @since 2023-05-06
  */
 @Repository
 public interface EmploymentInformationMapper {
@@ -41,7 +38,6 @@ public interface EmploymentInformationMapper {
      * @param info   查询
      * @param user   管理权限
      * @param salary 工资范围
-     * @return
      */
     Integer queryListCount(@Param("info") EmploymentInformation info,
                            @Param("user") PersonInfo user,
@@ -51,7 +47,6 @@ public interface EmploymentInformationMapper {
      * 插入毕业生信息
      *
      * @param employmentInformation 毕业生信息
-     * @return
      */
     Integer insertEmploymentInformation(@Param("info") EmploymentInformation employmentInformation);
 
@@ -59,23 +54,18 @@ public interface EmploymentInformationMapper {
      * 删除就业信息
      *
      * @param employmentInformation 毕业生信息
-     * @return
      */
     Integer delEmploymentInformation(@Param("info") EmploymentInformation employmentInformation);
 
     /**
      * 根据
-     * @param studentNum
-     * @return
      */
     @Select("select * from employment_information  where student_num=#{studentNum}")
-    EmploymentInformation qureyInfoByStudentNum(@Param("studentNum") Integer studentNum);
+    EmploymentInformation queryInfoByStudentNum(@Param("studentNum") Integer studentNum);
 
     /**
      * 更新毕业生信息
-     * @param employmentInformation
-     * @return
      */
-    Integer updayeInfo(@Param("info") EmploymentInformation employmentInformation);
+    Integer updateInfo(@Param("info") EmploymentInformation employmentInformation);
 
 }

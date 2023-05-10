@@ -57,7 +57,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     @Override
     public Boolean updatePerson(PersonInfo personInfo) {
         try {
-            Integer integer = personInfoMapper.updatePerson(personInfo);
+            Integer integer = personInfoMapper.updatePersonInfoById(personInfo);
             if (integer > 0) {
                 return true;
             } else {

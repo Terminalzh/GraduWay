@@ -5,9 +5,9 @@ import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author maitentai
+ * @author Terminal
  * @version 1.0
- * @date 2020-03-09 09:11
+ * @since 2023-05-06
  */
 @Repository
 public interface OrganizationNumMapper {

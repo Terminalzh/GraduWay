@@ -4,8 +4,6 @@ import com.gr.geias.GeiasApplicationTests;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author maitentai
  * @version 1.0
@@ -16,7 +14,7 @@ class ClassGradeMapperTest extends GeiasApplicationTests {
     ClassGradeMapper classGradeMapper;
     @Test
     void queryspecialtyId() {
-        Integer integer = classGradeMapper.queryspecialtyId(8);
+        Integer integer = classGradeMapper.querySpecialtyById(8);
         System.out.println(integer);
     }
 }

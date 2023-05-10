@@ -47,7 +47,7 @@ public class ClassGradeServiceImpl implements ClassGradeService {
     @Override
     @Transactional
     public Boolean addClassGrade(ClassGrade classGrade, Integer sum, Integer collegeId) {
-        Integer integer = classGradeMapper.insertClassGrede(classGrade);
+        Integer integer = classGradeMapper.insertClassGrade(classGrade);
         if (integer > 0) {
             try {
                 OrganizationNum organizationNum = new OrganizationNum();
@@ -75,7 +75,7 @@ public class ClassGradeServiceImpl implements ClassGradeService {
     @Transactional
     public Boolean updateClassGrade(ClassGrade classGrade, Integer sum, Integer collegeId) {
         try {
-            Integer integer = classGradeMapper.updateClassGrede(classGrade);
+            Integer integer = classGradeMapper.updateClassGradeById(classGrade);
             Integer integer1 = organizationNumMapper.updateNumByClassGradeId(sum, classGrade.getClassId());
 //            collegeService.getAndSetcount(collegeId);
 //            specialtyService.getAndSetSpecialtyCount(classGrade.getSpecialtyId());
@@ -99,7 +99,7 @@ public class ClassGradeServiceImpl implements ClassGradeService {
             classGrade.setClassId(classId);
             employmentInformation.setClassGrade(classGrade);
             employmentInformationMapper.delEmploymentInformation(employmentInformation);
-            Integer integer = classGradeMapper.delClassGrede(classId);
+            Integer integer = classGradeMapper.deleteClassGradeById(classId);
             if (integer > 0 && integer1 > 0) {
                 return true;
             } else {
