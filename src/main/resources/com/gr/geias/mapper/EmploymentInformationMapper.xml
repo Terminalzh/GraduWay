@@ -109,6 +109,10 @@
         order by information_id
         limit #{indexnum},#{pagesize}
     </select>
+    <select id="queryAll" resultMap="BaseResultMap">
+        select *
+        from employment_information;
+    </select>
     <select id="queryListCount" resultType="int">
         select
         count(*)

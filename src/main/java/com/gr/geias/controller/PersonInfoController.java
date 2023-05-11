@@ -153,12 +153,9 @@ public class PersonInfoController {
         } else if (personInfo.getPersonId() == null) {
             map.put("success", false);
             map.put("errMsg", "没有该用户");
-        } else if (personInfo.getPersonId() != null) {
+        } else {
             request.getSession().setAttribute("person", personInfo);
             map.put("success", true);
-        } else {
-            map.put("success", false);
-            map.put("errMsg", "登录失败");
         }
         return map;
     }

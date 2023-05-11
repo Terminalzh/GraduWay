@@ -26,7 +26,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">学号</label>
             <div class="layui-input-block">
-                <input type="text" name="studentNum" required lay-verify="required" placeholder="请输入学号"
+                <input type="text" id="studentNum" name="studentNum" required lay-verify="required"
+                       placeholder="请输入学号"
                        autocomplete="off"
                        class="layui-input">
             </div>
@@ -34,7 +35,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" required lay-verify="required" placeholder="请输入姓名"
+                <input type="text" id="name" name="name" required lay-verify="required" placeholder="请输入姓名"
                        autocomplete="off"
                        class="layui-input">
             </div>
@@ -42,14 +43,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">性别</label>
             <div class="layui-input-block">
-                <input type="radio" name="gender" value="1" title="男">
-                <input type="radio" name="gender" value="0" title="女" checked>
+                <input id="man" type="radio" name="gender" value="1" title="男"/>
+                <input id="woman" type="radio" name="gender" value="0" title="女"/>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">是否就业</label>
             <div class="layui-input-block">
-                <input type="radio" name="jiuye" lay-filter="jiuye" value="1" title="以就业" checked>
+                <input type="radio" name="jiuye" lay-filter="jiuye" value="1" title="已就业" checked>
                 <input type="radio" name="jiuye" lay-filter="jiuye" value="0" title="未就业">
             </div>
         </div>
@@ -127,9 +128,9 @@
 <script>
     layui.use('form', function () {
         var form = layui.form;
+        const params = new URLSearchParams(window.location.search);
         form.on('submit(formDemo)', function (data) {
             var field = data.field;
-            var jiuye = field.jiuye;
             var studentNum = field.studentNum;
             var name = field.name;
             var gender = field.gender;
@@ -144,21 +145,17 @@
             fromData.append("studentNum", studentNum);
             fromData.append("name", name);
             fromData.append("gender", gender);
-            fromData.append("jiuye", jiuye);
             fromData.append("collegeId", college);
             fromData.append("specialtyId", specialty);
             fromData.append("classId", classgrade);
             fromData.append("areaId", area);
             fromData.append("unitId", unitkind);
-            fromData.append("employmentwayId", employmentway);
+            fromData.append("employmentWayId", employmentway);
             fromData.append("salary", salary);
             intoinfo(fromData);
 
             function intoinfo(update) {
-                var url = '/info/addemploymentinfo';
-                // if (update != null) {
-                //     url += '?update=' + update;
-                // }
+                var url = params.size > 0 ? "/info/modeifyemploymentinfo" : "/info/addemploymentinfo";
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -194,7 +191,6 @@
             }
         });
         getInitData();
-
         getunitAndway();
 
         function getInitData() {
@@ -207,7 +203,6 @@
                 success: function (data) {
                     if (data.success) {
                         initData(data);
-
                     } else {
                         layer.alert(data.errMsg, {
                             icon: 6
@@ -218,7 +213,7 @@
         }
 
         function initData(data) {
-            var html = '';
+            let html = '<option value="0" selected>请选择学院</option>';
             data.collegeList.map(function (item, index) {
                 html += '<option value="' + item.collegeId + '">' + item.collegeName + '</option>';
             });
@@ -226,7 +221,7 @@
             form.render('select');
         }
 
-        function getspecualty(collegeId, form) {
+        function getspecualty(collegeId) {
             var url = '/info/getspecialty?collegeId=' + collegeId;
             $.ajax({
                 url: url,
@@ -235,12 +230,11 @@
                 async: false,
                 success: function (data) {
                     if (data.success) {
-                        var html = '';
+                        var html = '<option value="0">请选择专业</option>';
                         data.specialtyList.map(function (item, index) {
                             html += '<option value="' + item.specialtyId + '">' + item.specialtyName + '</option>';
                         });
                         $("#specialty").html(html);
-                        form.render('select');
                     } else {
                         layer.alert(data.errMsg, {
                             icon: 6
@@ -259,12 +253,11 @@
                 async: false,
                 success: function (data) {
                     if (data.success) {
-                        var html = '';
-                        data.classGradeList.map(function (item, index) {
+                        var html = '<option value="0">请选择班级</option>';
+                        data.classGradeList.map(function (item) {
                             html += '<option value="' + item.classId + '">' + item.className + '</option>';
                         });
                         $("#classgrade").html(html);
-                        form.render('select');
                     } else {
                         layer.alert(data.errMsg, {
                             icon: 6
@@ -316,17 +309,17 @@
         }
 
         form.on('select(college)', function (data) {
-            console.log(data);
-            getspecualty(data.value, form);
+            getspecualty(data.value);
+            form.render();
         });
 
         form.on('select(specialty)', function (data) {
-            console.log(data);
             getclassgrade(data.value, form);
+            form.render();
         });
 
         form.on('radio(jiuye)', function (data) {
-            if (data.value == 1) {
+            if (data.value === 1) {
                 $('#employment [lay-verify=""]').attr('lay-verify', 'required');
                 $("#employment").show();
                 form.render('select');
@@ -336,8 +329,40 @@
                 form.render('select');
             }
         });
+
+        fillData();
+
+        function fillData() {
+            let student = {};
+            if (params.size > 0) {
+                let myObj = {};
+                for (const [key, value] of params.entries()) {
+                    myObj[key] = value;
+                }
+                student = JSON.parse(myObj.data);
+                $('#studentNum').val(student.studentNum);
+                $('#name').val(student.name);
+                $("input[name='gender'][value=" + student.gender + "]").prop("checked", true);
+                $('#college').val(student.college.collegeId);
+                getspecualty(student.college.collegeId);
+                getclassgrade(student.specialty.specialtyId);
+                $('#specialty').val(student.specialty.specialtyId);
+                $('#classgrade').val(student.classGrade.classId);
+                if (student.msg === "未就业") {
+                    $("input[name='jiuye'][value='0']").prop("checked", true)
+                    $("#employment").hide();
+                } else {
+                    $("input[name='jiuye'][value='1']").prop("checked", true)
+                    $("#employment").show();
+                }
+                $('#area').val(student.area.areaId);
+                $('#unitkind').val(student.unitKind.unitId);
+                $('#employmentway').val(student.employmentWay.employmentWayId);
+                $('#salary').val(student.salary);
+                layui.form.render();
+            }
+        }
     })
-    ;
 </script>
 </body>
 </html>

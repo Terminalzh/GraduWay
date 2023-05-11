@@ -79,33 +79,21 @@ public class InfoController {
     public Map<String, Object> addEmploymentInfo(@RequestParam("studentNum") Integer studentNum,
                                                  @RequestParam("name") String name,
                                                  @RequestParam("gender") Integer gender,
-                                                 @RequestParam("jiuye") Integer jiuye,
                                                  @RequestParam("collegeId") Integer collegeId,
                                                  @RequestParam("specialtyId") Integer specialtyId,
                                                  @RequestParam("classId") Integer classId,
                                                  @RequestParam("areaId") Integer areaId,
                                                  @RequestParam("unitId") Integer unitId,
-                                                 @RequestParam("employmentwayId") Integer employmentwayId,
-                                                 @RequestParam("salary") String salary,
-                                                 @RequestParam(value = "update", required = false) Boolean update) {
+                                                 @RequestParam("employmentWayId") Integer employmentwayId,
+                                                 @RequestParam("salary") String salary) {
         Map<String, Object> map = new HashMap<>(3);
-        if(jiuye>1){
-            //todo
-        }
         EmploymentInformation infoByStudentNum = employmentInformationService.getInfoByStudentNum(studentNum);
         EmploymentInformation employmentInfo = new EmploymentInformation();
-        if (update == null) {
-            update = false;
-        }
-        if (!update) {
-            if (infoByStudentNum != null) {
-                map.put("success", false);
-                map.put("writed", true);
-                map.put("errMsg", "该学号已经填写过了，需不需要修改");
-                return map;
-            }
-        } else {
-            employmentInfo.setInformationId(infoByStudentNum.getInformationId());
+        if (infoByStudentNum != null) {
+            map.put("success", false);
+            map.put("writed", true);
+            map.put("errMsg", "该学号已经填写过了");
+            return map;
         }
         employmentInfo.setStudentNum(studentNum);
         employmentInfo.setName(name);
@@ -130,12 +118,7 @@ public class InfoController {
         employmentInfo.setEmploymentWay(employmentWay);
         employmentInfo.setSalary(salary);
         employmentInfo.setCreateTime(new Date());
-        Integer integer = 0;
-        if (update) {
-            integer = employmentInformationService.updateInfo(employmentInfo);
-        } else {
-            integer = employmentInformationService.addEmpoymentInfo(employmentInfo);
-        }
+        Integer integer = employmentInformationService.addEmpoymentInfo(employmentInfo);
         if (integer > 0) {
             map.put("success", true);
         } else {
@@ -145,4 +128,37 @@ public class InfoController {
         return map;
     }
 
+    @RequestMapping("/modeifyemploymentinfo")
+    public Map<String, Object> modeifyemploymentinfo(@RequestParam("studentNum") Integer studentNum,
+                                                     @RequestParam("name") String name,
+                                                     @RequestParam("gender") Integer gender,
+                                                     College college,
+                                                     Specialty specialty,
+                                                     ClassGrade classGrade,
+                                                     Area area,
+                                                     UnitKind unitKind,
+                                                     EmploymentWay employmentWay,
+                                                     @RequestParam("salary") String salary) {
+        Map<String, Object> map = new HashMap<>(3);
+        EmploymentInformation employmentInfo = employmentInformationService.getInfoByStudentNum(studentNum);
+        employmentInfo.setStudentNum(studentNum);
+        employmentInfo.setName(name);
+        employmentInfo.setGender(gender);
+        employmentInfo.setCollege(college);
+        employmentInfo.setSpecialty(specialty);
+        employmentInfo.setClassGrade(classGrade);
+        employmentInfo.setArea(area);
+        employmentInfo.setUnitKind(unitKind);
+        employmentInfo.setEmploymentWay(employmentWay);
+        employmentInfo.setSalary(salary);
+        employmentInfo.setCreateTime(new Date());
+        int i = employmentInformationService.updateInfo(employmentInfo);
+        if (i > 0) {
+            map.put("success", true);
+        } else {
+            map.put("success", false);
+            map.put("errMsg", "出现错误");
+        }
+        return map;
+    }
 }

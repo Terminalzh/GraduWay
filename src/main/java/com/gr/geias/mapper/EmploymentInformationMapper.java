@@ -4,6 +4,7 @@ import com.gr.geias.entity.EmploymentInformation;
 import com.gr.geias.entity.PersonInfo;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +31,9 @@ public interface EmploymentInformationMapper {
                                           @Param("pagesize") int pagesize,
                                           @Param("user") PersonInfo user,
                                           @Param("salary") Integer[] salary);
+
+    List<EmploymentInformation> queryAll();
+
 
     /**
      * 统计查询总数
@@ -67,4 +71,6 @@ public interface EmploymentInformationMapper {
      */
     Integer updateInfo(@Param("info") EmploymentInformation employmentInformation);
 
+    @Update("update employment_information set student_num = #{num} where information_id = #{id};")
+    int updateStudentNum(@Param("num") int num, @Param("id") int id);
 }
