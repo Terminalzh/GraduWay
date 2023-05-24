@@ -107,56 +107,29 @@ public class PersonInfoController {
     public Map<String, Object> updateUser(HttpServletRequest request,
                                           @RequestParam("personname") String personname,
                                           @RequestParam("username") String username,
-                                          @RequestParam("password") String password) {
+                                          @RequestParam("password") String password,
+                                          @RequestParam("originPassword") String originPassword
+    ) {
         Map<String, Object> map = new HashMap<>(2);
         PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
-        person.setUsername(username);
-        person.setPassword(password);
-        person.setPersonName(personname);
-        Boolean aBoolean = personInfoService.updatePerson(person);
-        if (aBoolean) {
-            map.put("success", true);
-            return map;
+        if (person.getPassword().equals(originPassword)) {
+            person.setUsername(username);
+            person.setPassword(password);
+            person.setPersonName(personname);
+            Boolean aBoolean = personInfoService.updatePerson(person);
+            if (aBoolean) {
+                map.put("success", true);
+                return map;
+            } else {
+                map.put("success", false);
+                map.put("errMsg", "修改出错");
+                return map;
+            }
         } else {
             map.put("success", false);
-            map.put("errMsg", "修改出错");
+            map.put("errMsg", "原始密码错误");
             return map;
         }
     }
 
-    @RequestMapping("/addFase")
-    public Map<String, Object> addFase(@RequestParam("file") String file,
-                                       HttpServletRequest request) throws Exception {
-        Map<String, Object> map = new HashMap<>(2);
-        PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
-        String[] split = file.split(",");
-        Boolean aBoolean = personInfoService.addFace(person, split[1]);
-        if (aBoolean) {
-            request.getSession().setAttribute("person", person);
-            map.put("success", true);
-        } else {
-            map.put("success", false);
-            map.put("errMsg", "添加出错");
-        }
-        return map;
-    }
-
-    @RequestMapping("/faseLogin")
-    public Map<String, Object> faseLogin(@RequestParam("file") String file,
-                                         HttpServletRequest request) {
-        Map<String, Object> map = new HashMap<>(2);
-        String[] split = file.split(",");
-        PersonInfo personInfo = personInfoService.checkFace(split[1]);
-        if (personInfo == null) {
-            map.put("success", false);
-            map.put("errMsg", "没有识别到人脸");
-        } else if (personInfo.getPersonId() == null) {
-            map.put("success", false);
-            map.put("errMsg", "没有该用户");
-        } else {
-            request.getSession().setAttribute("person", personInfo);
-            map.put("success", true);
-        }
-        return map;
-    }
 }

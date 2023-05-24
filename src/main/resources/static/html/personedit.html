@@ -37,6 +37,13 @@
                            autocomplete="off" class="layui-input"></div>
             </div>
             <div class="layui-form-item">
+                <label for="originPassword" class="layui-form-label">
+                    <span class="x-red">*</span>原始密码</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="originPassword" name="originPassword" required="" lay-verify="required"
+                           autocomplete="off" class="layui-input"></div>
+            </div>
+            <div class="layui-form-item">
                 <label for="password" class="layui-form-label">
                     <span class="x-red">*</span>密码</label>
                 <div class="layui-input-inline">
@@ -57,6 +64,7 @@
             var form = layui.form,
                 layer = layui.layer;
             getinit();
+
             function getinit(personId) {
                 var url = '/personinfo/getuser';
                 $.ajax({
@@ -84,8 +92,8 @@
                     var username = data.field.username;
                     var password = data.field.password;
                     var personname = data.field.personname;
-
-                    var url = '/personinfo/updateuser?personname=' + personname +'&username='+username+'&password='+password;
+                    var originPassword = data.field.originPassword;
+                    var url = '/personinfo/updateuser?personname=' + personname + '&username=' + username + '&password=' + password + '&originPassword=' + originPassword;
                     $.ajax({
                         url: url,
                         type: "get",

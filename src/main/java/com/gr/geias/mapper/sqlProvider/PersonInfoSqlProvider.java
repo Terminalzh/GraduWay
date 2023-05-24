@@ -10,7 +10,7 @@ import org.apache.ibatis.jdbc.SQL;
  * @since 2023-05-06
  */
 public class PersonInfoSqlProvider {
-    public static String updatePersonInfoById(@Param("person") PersonInfo personInfo) {
+    public static String updatePersonInfoById(@Param("personInfo") PersonInfo personInfo) {
         return new SQL() {{
             UPDATE("person_info");
             SET("person_name = #{personInfo.personName}");

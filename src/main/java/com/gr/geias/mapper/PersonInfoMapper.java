@@ -64,7 +64,7 @@ public interface PersonInfoMapper {
      * 更新人员信息
      */
     @UpdateProvider(type = PersonInfoSqlProvider.class, method = "updatePersonInfoById")
-    Integer updatePersonInfoById(@Param("person") PersonInfo personInfo);
+    Integer updatePersonInfoById(@Param("personInfo") PersonInfo personInfo);
 
     /**
      * 删除用户

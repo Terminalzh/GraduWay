@@ -130,7 +130,7 @@
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main2'));
 
-    var weijiuye =[];
+    var weijiuye = [];
     var url = '/welcome/getcountbysalary';
     $.ajax({
         url: url,
@@ -165,8 +165,8 @@
         xAxis: [
             {
                 type: 'category',
-                data: ['0-3k', '3k-4k', '4k-5k', '5k-6k', '6k-7k','7k-8k'
-                    ,'8k-9k','9k-10k','10k-11k','11k-12k','12k-13k','13k-14k',"14k+"],
+                data: ['0-3k', '3k-4k', '4k-5k', '5k-6k', '6k-7k', '7k-8k'
+                    , '8k-9k', '9k-10k', '10k-11k', '11k-12k', '12k-13k', '13k-14k', "14k+"],
                 axisTick: {
                     alignWithLabel: true
                 }
@@ -192,8 +192,8 @@
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main3'));
-    var list1=[];
-    var nameList1 =[];
+    var list1 = [];
+    var nameList1 = [];
     var url = '/welcome/getcountorgratio';
     $.ajax({
         url: url,
@@ -290,8 +290,8 @@
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main4'));
-    var list=[];
-    var nameList =[];
+    var list = [];
+    var nameList = [];
     var url = '/welcome/getcountorg';
     $.ajax({
         url: url,

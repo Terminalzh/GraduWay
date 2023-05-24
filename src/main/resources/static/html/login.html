@@ -27,14 +27,13 @@
     <div id="darkbannerwrap"></div>
 
     <form method="post" class="layui-form">
-        <input name="username" placeholder="用户名" type="text" lay-verify="required" class="layui-input">
-        <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码" type="password" class="layui-input">
-        <hr class="hr15">
-        <input type="button" value="人脸登录"  onclick="xadmin.open('人脸识别','/page/faseLogin',425,600)">
+        <input name="username" placeholder="用户名" type="text" lay-verify="required" style="margin-bottom: 20px"
+               class="layui-input">
+        <input name="password" lay-verify="required" placeholder="密码" type="password" style="margin-bottom: 20px"
+               class="layui-input">
         <br>
-        <input id="submit" value="登录" lay-submit lay-filter="login" style="width:100%; padding-top: 3px; margin-top: 1rem" type="button">
-        <hr class="hr20">
+        <input id="submit" value="登录" lay-submit lay-filter="login"
+               style="width:100%; height: 50px; padding-top: 3px; margin-top: 1rem" type="button">
     </form>
 </div>
 <script>
@@ -42,30 +41,30 @@
         layui.use('form', function () {
             var form = layui.form;
             form.on('submit(login)', function (data) {
-                    var username = data.field.username;
-                    var password = data.field.password;
-                    var fromData = new FormData();
-                    fromData.append("username", username);
-                    fromData.append("password", password);
-                    $.ajax({
-                        url: '/personinfo/login',
-                        type: 'POST',
-                        data: fromData,
-                        contentType: false,
-                        processData: false,
-                        async: false,
-                        dataType: 'json',
-                        success: function (data) {
-                            if (data.success) {
-                                location.href='/page/index';
-                            }else {
-                                layer.alert(data.errMsg, {
-                                    icon: 5,
-                                    title: "错误"
-                                });
-                            }
+                var username = data.field.username;
+                var password = data.field.password;
+                var fromData = new FormData();
+                fromData.append("username", username);
+                fromData.append("password", password);
+                $.ajax({
+                    url: '/personinfo/login',
+                    type: 'POST',
+                    data: fromData,
+                    contentType: false,
+                    processData: false,
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                            location.href = '/page/index';
+                        } else {
+                            layer.alert(data.errMsg, {
+                                icon: 5,
+                                title: "错误"
+                            });
                         }
-                    });
+                    }
+                });
             });
         });
     })

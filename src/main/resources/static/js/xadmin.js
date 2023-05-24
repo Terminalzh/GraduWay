@@ -98,7 +98,6 @@
             title: title,
             content: url
         });
-        layer.full(index);
     }
     /**
      * [close 关闭弹出层]
