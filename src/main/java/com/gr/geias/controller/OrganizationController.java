@@ -191,6 +191,10 @@ public class OrganizationController {
         if (person.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
             college = collegeService.getCollege(person.getPersonId());
         }
+        if (person.getEnableStatus() == EnableStatusEnums.TEACHER.getState()) {
+            college = new ArrayList<>();
+            college.add(collegeService.getCollegeById(person.getCollegeId()));
+        }
         if (college != null) {
             map.put("success", true);
             map.put("collegeList", college);
@@ -381,14 +385,13 @@ public class OrganizationController {
             Specialty specialtyById = specialtyService.getSpecialtyById(specialtyId);
             List<ClassGrade> classGradeList = classGradeService.getClassGrade(specialtyId, null);
             List<ClassGradeAndSpecialty> list = new ArrayList<>();
-            for (int i = 0; i < classGradeList.size(); i++) {
+            for (ClassGrade grade : classGradeList) {
                 ClassGradeAndSpecialty classGradeAndSpecialty = new ClassGradeAndSpecialty();
-                ClassGrade classGrade = classGradeList.get(i);
-                classGradeAndSpecialty.setClassGrade(classGrade);
+                classGradeAndSpecialty.setClassGrade(grade);
                 classGradeAndSpecialty.setSpecialty(specialtyById);
-                Integer classGradeCount = organizationNumService.getClassGradeCount(classGrade.getClassId());
+                Integer classGradeCount = organizationNumService.getClassGradeCount(grade.getClassId());
                 classGradeAndSpecialty.setSum(classGradeCount);
-                PersonInfo personById = personInfoService.getPersonById(classGrade.getAdminId());
+                PersonInfo personById = personInfoService.getPersonById(grade.getAdminId());
                 classGradeAndSpecialty.setPersonInfo(personById);
                 list.add(classGradeAndSpecialty);
             }
@@ -411,13 +414,13 @@ public class OrganizationController {
     @RequestMapping(value = "/getpersoninit", method = RequestMethod.GET)
     public Map<String, Object> getpersoninit(@RequestParam("collegeId") Integer collegeId, HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>(3);
-        PersonInfo penson = (PersonInfo) request.getSession().getAttribute("person");
+        PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
         List<PersonInfo> personByCollegeId = null;
-        if (penson.getEnableStatus() == EnableStatusEnums.schoolmaster.getState()) {
+        if (person.getEnableStatus() == EnableStatusEnums.schoolmaster.getState()) {
             personByCollegeId = personInfoService.getPersonByCollegeId(collegeId);
         }
-        if (penson.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
-            personByCollegeId = personInfoService.getPersonByCollegeId(penson.getCollegeId());
+        if (person.getEnableStatus() == EnableStatusEnums.PREXY.getState() || person.getEnableStatus() == EnableStatusEnums.TEACHER.getState()) {
+            personByCollegeId = personInfoService.getPersonByCollegeId(person.getCollegeId());
         }
         if (personByCollegeId.size() > 0) {
             map.put("success", true);
@@ -497,13 +500,13 @@ public class OrganizationController {
                                                 @RequestParam("sum") Integer sum) {
         Map<String, Object> map = new HashMap<>(3);
         if (classId == null || personId == null || classGradeName == null || collegeId == null
-                || specialtyId == null || sum == null) {
+            || specialtyId == null || sum == null) {
             map.put("success", false);
             map.put("errMsg", "信息输入错误!");
             return map;
         }
         if (classId == 0 || personId == 0 || classGradeName.equals("") || collegeId == 0
-                || specialtyId == 0 || sum <= 0) {
+            || specialtyId == 0 || sum <= 0) {
             map.put("success", false);
             map.put("errMsg", "信息输入错误!");
             return map;

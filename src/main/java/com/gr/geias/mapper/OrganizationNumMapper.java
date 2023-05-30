@@ -28,7 +28,7 @@ public interface OrganizationNumMapper {
      * @return
      */
     @Update("update organization_num set sum=#{sum} where college_id=#{collegeId}")
-    Integer updataOrganizationNumByCollegeId(@Param("sum") Integer sum, @Param("collegeId") Integer collegeId);
+    Integer updateOrganizationNumByCollegeId(@Param("sum") Integer sum, @Param("collegeId") Integer collegeId);
 
     /**
      * 查询学院人数
@@ -55,7 +55,7 @@ public interface OrganizationNumMapper {
      * @return
      */
     @Select("select sum from organization_num where specialty_id=#{specialtyId}")
-    Integer[] queryCountByspecialtyId(@Param("specialtyId") Integer specialtyId);
+    Integer[] queryCountBySpecialtyId(@Param("specialtyId") Integer specialtyId);
 
 
     /**
@@ -74,7 +74,7 @@ public interface OrganizationNumMapper {
      * @return
      */
     @Select("select sum from organization_num where class_id=#{classId}")
-    Integer queryCountByclassId(@Param("classId") Integer classId);
+    Integer queryCountByClassId(@Param("classId") Integer classId);
 
 
     /**
@@ -85,7 +85,7 @@ public interface OrganizationNumMapper {
      * @return
      */
     @Update("update organization_num set sum=#{sum} where specialty_id=#{specialtyId}")
-    Integer updataOrganizationNumBySpecialtyId(@Param("sum") Integer sum, @Param("specialtyId") Integer specialtyId);
+    Integer updateOrganizationNumBySpecialtyId(@Param("sum") Integer sum, @Param("specialtyId") Integer specialtyId);
 
     /**
      * 更新班级人数

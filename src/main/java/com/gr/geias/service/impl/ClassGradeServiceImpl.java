@@ -42,6 +42,11 @@ public class ClassGradeServiceImpl implements ClassGradeService {
     }
 
     @Override
+    public ClassGrade getClassGradeByClassId(Integer classId) {
+        return classGradeMapper.queryClassGradeById(classId);
+    }
+
+    @Override
     @Transactional
     public Boolean addClassGrade(ClassGrade classGrade, Integer sum, Integer collegeId) {
         Integer integer = classGradeMapper.insertClassGrade(classGrade);

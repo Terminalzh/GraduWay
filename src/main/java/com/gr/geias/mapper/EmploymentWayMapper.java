@@ -1,6 +1,7 @@
 package com.gr.geias.mapper;
 
 import com.gr.geias.entity.EmploymentWay;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -18,5 +19,8 @@ public interface EmploymentWayMapper {
      */
     @Select("select * from employment_way")
     List<EmploymentWay> queryEmploymentWay();
+
+    @Select("select * from employment_way where employment_way_id = #{employmentWayId}")
+    EmploymentWay queryEmploymentWayByEmploymentWayId(@Param("employmentWayId") Integer employmentWayId);
 
 }

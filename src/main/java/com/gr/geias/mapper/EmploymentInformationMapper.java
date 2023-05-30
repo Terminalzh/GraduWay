@@ -1,10 +1,9 @@
 package com.gr.geias.mapper;
 
+import com.gr.geias.dto.EmploymentLogin;
 import com.gr.geias.entity.EmploymentInformation;
 import com.gr.geias.entity.PersonInfo;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
  * @version 1.0
  * @since 2023-05-06
  */
-@Repository
+@Mapper
 public interface EmploymentInformationMapper {
     /**
      * 分页查询信息
@@ -63,6 +62,28 @@ public interface EmploymentInformationMapper {
     /**
      * 根据
      */
+
+    @Results({
+            @Result(id = true, column = "information_id", property = "informationId"),
+            @Result(column = "student_num", property = "studentNum"),
+            @Result(column = "name", property = "name"),
+            @Result(column = "class_id", property = "classGrade",
+                    one = @One(select = "com.gr.geias.mapper.ClassGradeMapper.queryClassGradeById")),
+            @Result(column = "area_id", property = "area",
+                    one = @One(select = "com.gr.geias.mapper.AreaMapper.queryAreaByAreaId")),
+            @Result(column = "unit_id", property = "unitKind",
+                    one = @One(select = "com.gr.geias.mapper.UnitKindMapper.queryUnitKindByUnKindId")),
+            @Result(column = "salary", property = "salary"),
+            @Result(column = "employment_way_id", property = "employmentWay",
+                    one = @One(select = "com.gr.geias.mapper.EmploymentWayMapper.queryEmploymentWayByEmploymentWayId")),
+            @Result(column = "msg", property = "msg"),
+            @Result(column = "create_time", property = "createTime"),
+            @Result(column = "college_id", property = "college",
+                    one = @One(select = "com.gr.geias.mapper.CollegeMapper.queryCollegeById")),
+            @Result(column = "specialty_id", property = "specialty",
+                    one = @One(select = "com.gr.geias.mapper.SpecialtyMapper.querySpecialtyById")),
+            @Result(column = "gender", property = "gender")
+    })
     @Select("select * from employment_information  where student_num=#{studentNum}")
     EmploymentInformation queryInfoByStudentNum(@Param("studentNum") Integer studentNum);
 
@@ -73,4 +94,13 @@ public interface EmploymentInformationMapper {
 
     @Update("update employment_information set student_num = #{num} where information_id = #{id};")
     int updateStudentNum(@Param("num") int num, @Param("id") int id);
+
+    @Insert("insert into employment_login (student_num, password) values (#{employmentLogin.studentNum},#{employmentLogin.password})")
+    int addEmploymentLogin(@Param("employmentLogin") EmploymentLogin employmentLogin);
+
+    @Select("select * from employment_login where student_num = #{studentNum}")
+    EmploymentLogin queryEmploymentLoginByStudentNum(int studentNum);
+
+    @Select("select * from employment_login")
+    List<EmploymentLogin> queryAllEmploymentLogin();
 }

@@ -1,7 +1,6 @@
 package com.gr.geias.dto;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.gr.geias.entity.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.util.Date;
  * @since 2023-05-06
  */
 @Data
-public class EmploymentInformationExcal implements Serializable {
+public class EmploymentInformationExcel implements Serializable {
     @ExcelProperty("Id")
     private Integer informationId;
     @ExcelProperty("学号")

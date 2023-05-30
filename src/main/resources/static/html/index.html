@@ -43,7 +43,7 @@
                 <dd>
                     <a href="#" onclick="xadmin.open('修改个人信息','/page/personedit',600,400)">更改个人信息</a></dd>
                 <dd>
-                    <a onclick="location.href='/page/login'">切换帐号</a></dd>
+                    <a href="/personinfo/logout" onclick="closePage()">切换帐号</a></dd>
                 <dd>
                     <a href="/personinfo/logout" onclick="closePage()">退出</a></dd>
             </dl>
@@ -85,7 +85,6 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>毕业生主要就业位置</cite></a>
                     </li>
-
                 </ul>
             </li>
             <li>
@@ -99,7 +98,6 @@
                             <i class="iconfont">&#xe6a7;</i>
                             <cite>组织架构图</cite></a>
                     </li>
-
                     <li>
                         <a onclick="xadmin.add_tab('学院信息管理','/page/organizationlist')">
                             <i class="iconfont">&#xe6a7;</i>
@@ -159,7 +157,7 @@
         </div>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <iframe src='/page/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                <iframe src='http://localhost:8080/page/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
             </div>
         </div>
         <div id="tab_show"></div>

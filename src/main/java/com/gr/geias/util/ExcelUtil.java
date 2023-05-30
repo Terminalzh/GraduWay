@@ -4,7 +4,7 @@ package com.gr.geias.util;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
-import com.gr.geias.dto.EmploymentInformationExcal;
+import com.gr.geias.dto.EmploymentInformationExcel;
 import com.gr.geias.entity.EmploymentInformation;
 import com.gr.geias.entity.PersonInfo;
 import com.gr.geias.mapper.EmploymentInformationMapper;
@@ -23,13 +23,13 @@ import java.util.*;
  * @since 2023-05-06
  */
 @Component
-public class ExcalUtil {
+public class ExcelUtil {
     @Autowired
     EmploymentInformationMapper employmentInformationMapper;
 
     private final static String TAG = "on";
 
-    public void createExcal(HttpServletResponse response,
+    public void createExcel(HttpServletResponse response,
                             PersonInfo personInfo,
                             Set<String> excludeColumnFiledNames) throws IOException {
         response.setContentType("application/vnd.ms-excel");
@@ -42,7 +42,7 @@ public class ExcalUtil {
         response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
         ExcelWriter excelWriter = EasyExcel.write(
                 response.getOutputStream(),
-                EmploymentInformationExcal.class)
+                EmploymentInformationExcel.class)
                 .excludeColumnFiledNames(excludeColumnFiledNames).build();
         WriteSheet writeSheet = EasyExcel.writerSheet("信息1").build();
         Integer integer = employmentInformationMapper.queryListCount(null, personInfo, null);
@@ -93,35 +93,35 @@ public class ExcalUtil {
     }
 
     private List getdata(Integer num, PersonInfo personInfo) {
-        List<EmploymentInformationExcal> list = new ArrayList<>();
+        List<EmploymentInformationExcel> list = new ArrayList<>();
         int indexNum = PageMath.pageNumtoRowIndex(num, 100);
         List<EmploymentInformation> employmentInformations =
                 employmentInformationMapper.queryList(null, indexNum,
                         100, personInfo, null);
         for (int i = 0; i < employmentInformations.size(); i++) {
             EmploymentInformation info = employmentInformations.get(i);
-            EmploymentInformationExcal infoExcal = getInfoExal(info);
-            list.add(infoExcal);
+            EmploymentInformationExcel infoExcel = getInfoExel(info);
+            list.add(infoExcel);
         }
         return list;
     }
 
-    private EmploymentInformationExcal getInfoExal(EmploymentInformation info) {
-        EmploymentInformationExcal infoExcal = new EmploymentInformationExcal();
-        infoExcal.setAreaName(info.getArea().getAreaName());
-        infoExcal.setClassName(info.getClassGrade().getClassName());
-        infoExcal.setCollegeName(info.getCollege().getCollegeName());
-        infoExcal.setCreateTime(info.getCreateTime());
-        infoExcal.setGender(getGender(info.getGender()));
-        infoExcal.setInformationId(info.getInformationId());
-        infoExcal.setMsg(info.getMsg());
-        infoExcal.setName(info.getName());
-        infoExcal.setSalary(info.getSalary());
-        infoExcal.setSpecialtyName(info.getSpecialty().getSpecialtyName());
-        infoExcal.setStudentNum(info.getStudentNum());
-        infoExcal.setUnitName(info.getUnitKind().getUnitName());
-        infoExcal.setWayName(info.getEmploymentWay().getVayName());
-        return infoExcal;
+    private EmploymentInformationExcel getInfoExel(EmploymentInformation info) {
+        EmploymentInformationExcel infoExcel = new EmploymentInformationExcel();
+        infoExcel.setAreaName(info.getArea().getAreaName());
+        infoExcel.setClassName(info.getClassGrade().getClassName());
+        infoExcel.setCollegeName(info.getCollege().getCollegeName());
+        infoExcel.setCreateTime(info.getCreateTime());
+        infoExcel.setGender(getGender(info.getGender()));
+        infoExcel.setInformationId(info.getInformationId());
+        infoExcel.setMsg(info.getMsg());
+        infoExcel.setName(info.getName());
+        infoExcel.setSalary(info.getSalary());
+        infoExcel.setSpecialtyName(info.getSpecialty().getSpecialtyName());
+        infoExcel.setStudentNum(info.getStudentNum());
+        infoExcel.setUnitName(info.getUnitKind().getUnitName());
+        infoExcel.setWayName(info.getEmploymentWay().getVayName());
+        return infoExcel;
     }
 
     private String getGender(Integer gender) {

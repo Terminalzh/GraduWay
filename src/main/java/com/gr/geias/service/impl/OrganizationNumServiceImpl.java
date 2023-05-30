@@ -23,12 +23,12 @@ public class OrganizationNumServiceImpl implements OrganizationNumService {
 
     @Override
     public Integer[] getspecialtyCount(Integer specialtyId) {
-        return organizationNumMapper.queryCountByspecialtyId(specialtyId);
+        return organizationNumMapper.queryCountBySpecialtyId(specialtyId);
     }
 
     @Override
     public Integer getClassGradeCount(Integer classId) {
-        return organizationNumMapper.queryCountByclassId(classId);
+        return organizationNumMapper.queryCountByClassId(classId);
     }
 
     @Override

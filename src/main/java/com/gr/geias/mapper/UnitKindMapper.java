@@ -1,6 +1,7 @@
 package com.gr.geias.mapper;
 
 import com.gr.geias.entity.UnitKind;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,6 @@ public interface UnitKindMapper {
     @Select("select * from unit_kind")
     List<UnitKind> queryUnitKind();
 
+    @Select("select * from unit_kind where unit_id = #{unitId} ;")
+    UnitKind queryUnitKindByUnKindId(@Param("unitId") Integer unitId);
 }

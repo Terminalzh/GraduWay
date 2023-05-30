@@ -1,6 +1,7 @@
 package com.gr.geias.service.impl;
 
 import com.gr.geias.dto.EmploymentInformationMsg;
+import com.gr.geias.dto.EmploymentLogin;
 import com.gr.geias.entity.EmploymentInformation;
 import com.gr.geias.entity.PersonInfo;
 import com.gr.geias.mapper.EmploymentInformationMapper;
@@ -18,7 +19,6 @@ import java.util.List;
  */
 @Service
 public class EmploymentInformationServiceImpl implements EmploymentInformationService {
-
 
     @Autowired
     EmploymentInformationMapper informationMapper;
@@ -40,22 +40,39 @@ public class EmploymentInformationServiceImpl implements EmploymentInformationSe
     }
 
     @Override
-    public Integer getCount(EmploymentInformation information, PersonInfo personInfo,Integer[] salary) {
+    public Integer getCount(EmploymentInformation information, PersonInfo personInfo, Integer[] salary) {
         return informationMapper.queryListCount(information, personInfo, salary);
     }
 
     @Override
-    public Integer addEmpoymentInfo(EmploymentInformation employmentInformation) {
+    public Integer addEmploymentInfo(EmploymentInformation employmentInformation) {
         return informationMapper.insertEmploymentInformation(employmentInformation);
     }
 
     @Override
     public EmploymentInformation getInfoByStudentNum(Integer studentNum) {
-        return informationMapper.queryInfoByStudentNum(studentNum);
+        EmploymentInformation information = informationMapper.queryInfoByStudentNum(studentNum);
+
+        return information;
     }
 
     @Override
     public Integer updateInfo(EmploymentInformation employmentInformation) {
         return informationMapper.updateInfo(employmentInformation);
+    }
+
+    @Override
+    public int addEmploymentLogin(EmploymentLogin employmentLogin) {
+        return informationMapper.addEmploymentLogin(employmentLogin);
+    }
+
+    @Override
+    public EmploymentLogin queryEmploymentLoginByStudentNum(int studentNum) {
+        return informationMapper.queryEmploymentLoginByStudentNum(studentNum);
+    }
+
+    @Override
+    public List<EmploymentLogin> queryAllEmploymentLogin() {
+        return informationMapper.queryAllEmploymentLogin();
     }
 }

@@ -118,7 +118,7 @@ public class InfoController {
         employmentInfo.setEmploymentWay(employmentWay);
         employmentInfo.setSalary(salary);
         employmentInfo.setCreateTime(new Date());
-        Integer integer = employmentInformationService.addEmpoymentInfo(employmentInfo);
+        Integer integer = employmentInformationService.addEmploymentInfo(employmentInfo);
         if (integer > 0) {
             map.put("success", true);
         } else {

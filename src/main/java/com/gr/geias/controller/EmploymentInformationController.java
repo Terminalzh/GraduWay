@@ -3,13 +3,11 @@ package com.gr.geias.controller;
 
 import com.gr.geias.dto.AreaCount;
 import com.gr.geias.dto.EmploymentInformationMsg;
+import com.gr.geias.dto.EmploymentLogin;
 import com.gr.geias.entity.*;
 import com.gr.geias.enums.EnableStatusEnums;
-import com.gr.geias.service.AreaService;
-import com.gr.geias.service.EmploymentInformationService;
-import com.gr.geias.service.EmploymentWayService;
-import com.gr.geias.service.UnitKindService;
-import com.gr.geias.util.ExcalUtil;
+import com.gr.geias.service.*;
+import com.gr.geias.util.ExcelUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,7 +39,9 @@ public class EmploymentInformationController {
     @Autowired
     UnitKindService unitKindService;
     @Autowired
-    ExcalUtil excalUtil;
+    ClassGradeService classGradeService;
+    @Autowired
+    ExcelUtil excelUtil;
 
     /**
      * 获取毕业生就业信息列表 权限 0，1，2
@@ -251,11 +251,35 @@ public class EmploymentInformationController {
                          @RequestParam(value = "salary", required = false) String salary) {
         PersonInfo personInfo = (PersonInfo) request.getSession().getAttribute("person");
         try {
-            Set<String> excludeColumn = excalUtil.getExcludeColumn(id, studentNum, name, gender, classGrade, specialty, college, area, unit, way, salary);
-            excalUtil.createExcal(response, personInfo, excludeColumn);
+            Set<String> excludeColumn = excelUtil.getExcludeColumn(id, studentNum, name, gender, classGrade, specialty, college, area, unit, way, salary);
+            excelUtil.createExcel(response, personInfo, excludeColumn);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    @RequestMapping(value = "/studentLogin", method = RequestMethod.POST)
+    public Map<String, Object> studentLogin(@RequestParam("studentNum") Integer studentNum, @RequestParam("password") String password,
+                                            HttpServletRequest request
+    ) {
+        Map<String, Object> map = new HashMap<>(3);
+        EmploymentLogin employmentLogin = informationService.queryEmploymentLoginByStudentNum(studentNum);
+        if (employmentLogin.getPassword().equals(password)) {
+            map.put("success", true);
+            request.getSession().setAttribute("employmentLogin", employmentLogin);
+        } else {
+            map.put("success", false);
+            map.put("msg", "账号或密码错误");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/queryStudentByStudentNum", method = RequestMethod.GET)
+    public Map<String, Object> queryStudentByStudentNum(@RequestParam("studentNum") Integer studentNum) {
+        Map<String, Object> map = new HashMap<>(3);
+        EmploymentInformation infoByStudentNum = informationService.getInfoByStudentNum(studentNum);
+        map.put("employmentInformation", infoByStudentNum);
+        map.put("success", true);
+        return map;
+    }
 }

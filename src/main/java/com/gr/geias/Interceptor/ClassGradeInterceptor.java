@@ -30,23 +30,17 @@ public class ClassGradeInterceptor implements HandlerInterceptor {
             int specialtyId = Integer.parseInt(specialtyStr);
             String collegeStr = request.getParameter("collegeId");
             List<Specialty> specialties = (List<Specialty>) request.getSession().getAttribute("specialtyList");
-            for (int i = 0; i < specialties.size(); i++) {
-                if (specialties.get(i).getSpecialtyId() == specialtyId) {
+            for (Specialty specialty : specialties) {
+                if (specialty.getSpecialtyId() == specialtyId) {
                     if (collegeStr != null) {
                         int collegeId = Integer.parseInt(collegeStr);
-                        if (person.getCollegeId() == collegeId) {
-                            return true;
-                        }else {
-                            return false;
-                        }
+                        return person.getCollegeId() == collegeId;
                     }
                     return true;
                 } else {
                     return false;
                 }
             }
-
-
         }
         return false;
     }

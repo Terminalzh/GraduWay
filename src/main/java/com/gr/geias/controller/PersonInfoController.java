@@ -57,12 +57,10 @@ public class PersonInfoController {
         }
         if (login != null) {
             request.getSession().setAttribute("person", login);
-            if (login.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
-                List<Specialty> specialtyList = specialtyService.getSpecialty(login.getCollegeId());
-                List<PersonInfo> person0 = personInfoService.getPersonByCollegeId(login.getCollegeId());
-                request.getSession().setAttribute("person0List", person0);
-                request.getSession().setAttribute("specialtyList", specialtyList);
-            }
+            List<Specialty> specialtyList = specialtyService.getSpecialty(login.getCollegeId());
+            List<PersonInfo> person0 = personInfoService.getPersonByCollegeId(login.getCollegeId());
+            request.getSession().setAttribute("person0List", person0);
+            request.getSession().setAttribute("specialtyList", specialtyList);
             Cookie cookie = new Cookie("personId", login.getPersonId().toString());
             cookie.setMaxAge(60 * 60 * 24 * 365);
             cookie.setPath("/");

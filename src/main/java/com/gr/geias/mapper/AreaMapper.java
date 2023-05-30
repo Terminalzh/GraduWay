@@ -3,6 +3,7 @@ package com.gr.geias.mapper;
 import com.gr.geias.entity.Area;
 import com.gr.geias.mapper.sqlProvider.AreaSqlProvider;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,7 @@ public interface AreaMapper {
      */
     @SelectProvider(type = AreaSqlProvider.class, method = "queryArea")
     List<Area> queryArea(@Param("area") Area area);
+
+    @Select("select * from area where area_id = #{areaId}")
+    Area queryAreaByAreaId(@Param("areaId") Integer areaId);
 }

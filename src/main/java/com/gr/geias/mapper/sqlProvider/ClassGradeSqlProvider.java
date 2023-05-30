@@ -17,7 +17,7 @@ public class ClassGradeSqlProvider {
                 WHERE("specialty_id = #{specialtyId}");
             }
             if (adminId != null) {
-                WHERE("adminId = #{adminId}");
+                WHERE("admin_id = #{adminId}");
             }
         }}.toString();
     }

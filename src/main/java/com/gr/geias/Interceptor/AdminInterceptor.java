@@ -17,14 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        PersonInfo person = (PersonInfo)request.getSession().getAttribute("person");
-        if (person.getEnableStatus()== EnableStatusEnums.schoolmaster.getState()){
+        PersonInfo person = (PersonInfo) request.getSession().getAttribute("person");
+        if (person.getEnableStatus() == EnableStatusEnums.schoolmaster.getState()) {
             return true;
-        }
-        if (person.getEnableStatus()==EnableStatusEnums.PREXY.getState()){
+        } else if (person.getEnableStatus() == EnableStatusEnums.PREXY.getState()) {
             return true;
+        } else if (person.getEnableStatus() == EnableStatusEnums.TEACHER.getState() && request.getServletPath().equals("/page/classgradelist")) {
+            return true;
+        } else {
+            response.sendRedirect("/page/error");
+            return false;
         }
-        response.sendRedirect("/page/error");
-        return false;
     }
 }

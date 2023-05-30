@@ -66,15 +66,5 @@ public interface PersonInfoService {
      */
     List<PersonInfo> getPerson1();
 
-    /**
-     * 添加人脸识别信息
-     * @param personInfo
-     * @param faseImage
-     * @return
-     */
-    Boolean addFace(PersonInfo personInfo, String faseImage);
-
-
-    PersonInfo checkFace(String image);
 
 }

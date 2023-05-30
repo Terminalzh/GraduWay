@@ -29,6 +29,9 @@ public interface ClassGradeMapper {
     @Select("select specialty_id from  clazz where class_id=#{classId}")
     Integer querySpecialtyById(@Param("classId") Integer classId);
 
+    @Select("select * from  clazz where class_id=#{classId}")
+    ClassGrade queryClassGradeById(@Param("classId") Integer classId);
+
     /**
      * 插入班级
      */
