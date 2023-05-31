@@ -34,7 +34,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**")
                 .excludePathPatterns("/page/login", "/page/error", "/page/getinfo", "/personinfo/logout")
-                .excludePathPatterns("/personinfo/login", "/info/**", "/welcome/getcountbyarea")
+                .excludePathPatterns("/personinfo/login", "/info/**", "/welcome/getcountbyarea","/employmentinformation/studentLogin")
                 .excludePathPatterns("/html/**", "/fonts/**", "/images/**", "/js/**", "/lib/**", "/css/**");
         registry.addInterceptor(adminInterceptor).addPathPatterns("/**")
                 .excludePathPatterns(
@@ -53,6 +53,8 @@ public class WebConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/init/getinit",
                         "/init/getleve",
+                        "/employmentinformation/studentLogin",
+                        "/employmentinformation/queryStudentByStudentNum",
                         "/employmentinformation/getemploymentinfo",
                         "/employmentinformation/getcountbyemploymentway",
                         "/employmentinformation/getcountbyunitkind",
