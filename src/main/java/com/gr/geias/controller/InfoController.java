@@ -20,6 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/info")
 public class InfoController {
+
     @Autowired
     CollegeService collegeService;
     @Autowired
@@ -138,7 +139,8 @@ public class InfoController {
                                                      Area area,
                                                      UnitKind unitKind,
                                                      EmploymentWay employmentWay,
-                                                     @RequestParam("salary") String salary) {
+                                                     @RequestParam("salary") String salary
+    ) {
         Map<String, Object> map = new HashMap<>(3);
         EmploymentInformation employmentInfo = employmentInformationService.getInfoByStudentNum(studentNum);
         employmentInfo.setStudentNum(studentNum);
